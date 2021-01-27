@@ -26,6 +26,12 @@ export default function App() {
     setAllPlaylists(playlists);
     console.log(playlists);
   }
+  async function handleAddToPlaylist(song){
+    // setAllPlaylists(allPlaylists.)
+    const playlists = await playlistApi.getAll(user);
+    setAllPlaylists(playlists);
+    console.log(playlists);
+  }
   return (
     <main className="App">
       { user ?
