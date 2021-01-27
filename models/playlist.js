@@ -17,7 +17,7 @@ const songSchema = new Schema({
 });
 
 const playlistSchema = new Schema({
-    // list_id: { type: String, required: true },
+    list_Name: { type: String, required: true },
     songs: [songSchema],
     author_name: { type: String, required: true },
     author_id:{ type: String, required: true },

@@ -1,0 +1,70 @@
+    /* Font */
+
+    @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700");
+    /* Design */
+
+    section {
+        width: 75%;
+        float: right;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cards_item {
+        display: flex;
+        padding: 1rem;
+        max-width: 300px;
+    }
+
+    @media (min-width: 40rem) {
+        .cards_item {
+            width: 50%;
+        }
+    }
+
+    @media (min-width: 56rem) {
+        .cards_item {
+            width: 33.3333%;
+        }
+    }
+
+    .card {
+        border-radius: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    .card_content{
+        text-align: left;
+    }
+  
+
+    .card_title {
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        margin: 0px;
+    }
+
+    .card_text {
+        color: #ffffff;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin-bottom: 1.25rem;
+        font-weight: 400;
+    }
