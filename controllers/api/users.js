@@ -1,4 +1,5 @@
 const User = require('../../models/user');
+const Playlist = require('../../models/playlist');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
