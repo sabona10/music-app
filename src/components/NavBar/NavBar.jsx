@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
 
@@ -26,27 +26,34 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
   }
 
   return (
-    <aside class="sidebar">
-      <nav class="nav">
+    <aside className="sidebar">
+      <nav className="nav">
         <ul>
           <li><NavLink exact activeStyle={{ color: 'white' }} to="/discover">Discover</NavLink></li>
           <li><NavLink exact activeStyle={{ color: 'white' }} to="/charts">Top Charts</NavLink></li>
           <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres">Genres</NavLink></li>
-          <li class="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists">Playlists</NavLink></li>
-          <ul class="playlist">
+          <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists">Playlists</NavLink></li>
+          <ul className="playlist">
             {allPlaylist.map(playlist =>
               <li>
-                <a href={() => false}><span>{playlist.list_Name}</span></a>
+                <Link
+                  to={{
+                    pathname: '/playlist',
+                    state: { playlist }
+                  }}
+                  key= {playlist._id}
+                ><span>{playlist.list_Name}</span></Link>
+                {/* <a href={() => false}><span>{playlist.list_Name}</span></a> */}
               </li>
             )}
-              <li><div class="inputField">
-                <input 
+            <li><div className="inputField">
+              <input
                 name="name"
                 value={playlistName}
                 onChange={handleChange}
                 type="text" placeholder="Add a playlist" />
-                  <button onClick={handleSubmit} disabled={disabled}>+</button>
-              </div></li>
+              <button onClick={handleSubmit} disabled={disabled}>+</button>
+            </div></li>
           </ul>
 
           <li><a href={() => false}><span>Welcome, {user.name}</span></a></li>
