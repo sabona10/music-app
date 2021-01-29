@@ -20,7 +20,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 2vmin;
+  /* padding: 2vmin; */
   height: 100vh;
 }
 

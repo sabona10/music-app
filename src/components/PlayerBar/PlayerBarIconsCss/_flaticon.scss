@@ -1,0 +1,80 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 29/01/2021 21:10
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("./Flaticon.eot");
+  src: url("./Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("./Flaticon.woff2") format("woff2"),
+       url("./Flaticon.woff") format("woff"),
+       url("./Flaticon.ttf") format("truetype"),
+       url("./Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("./Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-statistics:before { content: "\f100"; }
+.flaticon-music:before { content: "\f101"; }
+.flaticon-shuffle:before { content: "\f102"; }
+.flaticon-loop-arrows:before { content: "\f103"; }
+.flaticon-sound:before { content: "\f104"; }
+.flaticon-no-sound:before { content: "\f105"; }
+.flaticon-playlist:before { content: "\f106"; }
+.flaticon-arrow-loop:before { content: "\f107"; }
+.flaticon-heart-black-shape-symbol:before { content: "\f108"; }
+.flaticon-magnifying-glass:before { content: "\f109"; }
+.flaticon-square-of-rounded-corners:before { content: "\f10a"; }
+.flaticon-download-symbol:before { content: "\f10b"; }
+.flaticon-right-triangular-arrowhead:before { content: "\f10c"; }
+.flaticon-pause-symbol:before { content: "\f10d"; }
+.flaticon-paragraph-left-alignment-symbol-for-interface:before { content: "\f10e"; }
+.flaticon-next:before { content: "\f10f"; }
+.flaticon-previous:before { content: "\f110"; }
+.flaticon-dj:before { content: "\f111"; }
+.flaticon-playlist-1:before { content: "\f112"; }
+.flaticon-window-of-four-rounded-squares:before { content: "\f113"; }
+    
+    $font-Flaticon-statistics: "\f100";
+    $font-Flaticon-music: "\f101";
+    $font-Flaticon-shuffle: "\f102";
+    $font-Flaticon-loop-arrows: "\f103";
+    $font-Flaticon-sound: "\f104";
+    $font-Flaticon-no-sound: "\f105";
+    $font-Flaticon-playlist: "\f106";
+    $font-Flaticon-arrow-loop: "\f107";
+    $font-Flaticon-heart-black-shape-symbol: "\f108";
+    $font-Flaticon-magnifying-glass: "\f109";
+    $font-Flaticon-square-of-rounded-corners: "\f10a";
+    $font-Flaticon-download-symbol: "\f10b";
+    $font-Flaticon-right-triangular-arrowhead: "\f10c";
+    $font-Flaticon-pause-symbol: "\f10d";
+    $font-Flaticon-paragraph-left-alignment-symbol-for-interface: "\f10e";
+    $font-Flaticon-next: "\f10f";
+    $font-Flaticon-previous: "\f110";
+    $font-Flaticon-dj: "\f111";
+    $font-Flaticon-playlist-1: "\f112";
+    $font-Flaticon-window-of-four-rounded-squares: "\f113";

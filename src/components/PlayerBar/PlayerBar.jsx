@@ -3,9 +3,10 @@ import { findDOMNode } from 'react-dom'
 import { hot } from 'react-hot-loader'
 import screenfull from 'screenfull';
 import './PlayerBar.css'
-
+import './PlayerBarIconsCss/flaticon.css'
 import ReactPlayer from 'react-player/youtube'
 import Duration from './Duration'
+
 
 export default function PlayerBar({ load, url, setUrl, played, setPlayed, player, setPlayer, loaded, setLoaded }) {
     // const [url, setUrl] = useState(null);
@@ -165,11 +166,14 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
                         </span>
                     </div>
                     <div className='controls'>
-                        <span className='shuffle'>shuffle</span>
-                        <span className='previous'>previous</span>
-                        {!playing ? <span onClick={handlePlayPause} className='play'>play</span> : <span onClick={handlePlayPause} className='pause'>pause</span>}
-                        <span className='next'>next</span>
-                        <span className='loop'><input id='loop' type='checkbox' checked={loop} onChange={handleToggleLoop} /></span>
+                        <span className='shuffle flaticon-shuffle'></span>
+                        <span className='previous flaticon-previous'></span>
+                        {!playing ? <span onClick={handlePlayPause} className='flaticon-right-triangular-arrowhead play'></span> : <span onClick={handlePlayPause} className='flaticon-pause-symbol pause'></span>}
+                        <span className='next flaticon-next'></span>
+                        <span className='loop'>
+                            {/* <input id='loop' type='checkbox' checked={loop} onChange={handleToggleLoop} /> */}
+                            <span onClick={handleToggleLoop} className={loop ? 'flaticon-arrow-loop' : 'flaticon-arrow-loop bold' }></span> 
+                            </span>
                     </div>
                     <div className='slider'>
                         <span className='elapsed'><Duration seconds={duration * played} /></span>
@@ -183,7 +187,10 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
                         <span className='remaining'><Duration seconds={duration * (1 - played)}/></span>
                     </div>
                     <div className='volume'>
-                        <span className='mute'><input id='muted' type='checkbox' checked={muted} onChange={handleToggleMuted} /></span>
+                        <span className='mute'>
+                            {muted || volume ===0 ? <span onClick={handleToggleMuted} className='flaticon-no-sound'></span> : <span onClick={handleToggleMuted} className='flaticon-sound'></span>}
+                            {/* <input id='muted' type='checkbox' checked={muted} onChange={handleToggleMuted} /> */}
+                            </span>
                         <span className='volume-slider'> <input type='range' min={0} max={1} step='any' value={volume} onChange={handleVolumeChange} /></span>
                     </div>
                 </div>

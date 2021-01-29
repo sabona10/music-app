@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
 import ReactPlayer, {playing} from 'react-player/youtube'
 import './App.css';
@@ -26,16 +26,22 @@ export default function App() {
   const [played, setPlayed] = useState(0);
   const [loaded, setLoaded] = useState(0);
   const [player, setPlayer] = useState(null);
+
+  const history = useHistory();
   // const [onProgress, setOnProgress] = useState();
   // const [onePlaylists, setOnePlaylists] = useState([]);
   useEffect(() => {
     async function getAllPlaylists() {
+      console.log(user);
       const playlists = await playlistApi.getAll(getUser());
       setAllPlaylists(playlists);
       console.log(playlists);
+      
     }
-    getAllPlaylists();
-  }, [])
+    if(user){
+      getAllPlaylists();
+    }
+  }, [history,user])
   // console.log(user);
   async function handleGetAllPlaylist() {
     const playlists = await playlistApi.getAll(user);

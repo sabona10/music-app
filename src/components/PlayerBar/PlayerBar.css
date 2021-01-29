@@ -1,13 +1,13 @@
 .player-control-bar {
     color: white;
     width: 100%;
-    -webkit-transition: bottom .3s ease, background-color .3s ease;
-    -o-transition: bottom .3s ease, background-color .3s ease;
     transition: bottom .3s ease, background-color .3s ease;
     height: 60px;
     width: 100%;
     bottom: 0;
+    display: inline-flex;
     position: absolute;
+    background-color: rgb(199 197 197 / 37%);
     left: 0;
     font-size: 14px;
     z-index: 10;
@@ -22,8 +22,10 @@
 }
 
 .slider {
-    float: right;
+    /* float: right; */
     height: 60px;
+    display: inline-flex;
+    width: 100%;
     font-size: 22px;
 }
 
@@ -31,10 +33,50 @@
     display: flex;
 }
 
-.volume, .controls {
+.volume, .controls, .volume, .song-info {
     float: right;
     width: 60px;
     height: 60px;
+    /* border: solid 1px; */
+    width: 25%;
     font-size: 22px;
     text-align: center;
+}
+
+span.seek-slider input {
+    width: 100%;
+}
+
+span.elapsed {
+    width: 9%;
+}
+
+span.seek-slider {
+    width: 100%;
+    padding: 5px;
+}
+
+.volume {
+    display: inline-flex;
+}
+
+span.volume-slider {
+    width: 100%;
+}
+
+span.flaticon-arrow-loop.bold {
+    font-weight: bold;
+}
+
+.slider, .controls, .volume {
+    align-items: center;
+    padding: 10px;
+}
+
+span.pause::before {
+    font-size: 30px;
+}
+
+span.play::before {
+    font-size: 30px;
 }

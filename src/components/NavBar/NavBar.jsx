@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
+import '../PlayerBar/PlayerBarIconsCss/flaticon.css';
+import './NavBar.css'
 
 export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylist }) {
   const [playlistName, setPlaylistName] = useState('');
@@ -29,20 +31,20 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
     <aside className="sidebar">
       <nav className="nav">
         <ul>
-          <li><NavLink exact activeStyle={{ color: 'white' }} to="/discover">Discover</NavLink></li>
-          <li><NavLink exact activeStyle={{ color: 'white' }} to="/charts">Top Charts</NavLink></li>
-          <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres">Genres</NavLink></li>
-          <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists">Playlists</NavLink></li>
+          <li><NavLink exact activeStyle={{ color: 'white' }} to="/discover"> <span className='flaticon-window-of-four-rounded-squares'></span>  Discover</NavLink></li>
+          <li><NavLink exact activeStyle={{ color: 'white' }} to="/charts"><span className='flaticon-statistics'></span> Top Charts</NavLink></li>
+          <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres"> <span className='flaticon-dj'></span> Genres</NavLink></li>
+          <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists"> <span className='flaticon-playlist-1'></span> Playlists</NavLink></li>
           <ul className="playlist">
             {allPlaylist.map(playlist =>
-              <li key={playlist._id}>
+              <li key={playlist._id} className="playlists">
                 <Link
                   to={{
                     pathname: '/playlist',
                     state: { playlist }
                   }}
                   key= {playlist._id}
-                ><span>{playlist.list_Name}</span></Link>
+                > <span className='flaticon-paragraph-left-alignment-symbol-for-interface'></span> <span>{playlist.list_Name}</span></Link>
               </li>
             )}
             <li><div className="inputField">
