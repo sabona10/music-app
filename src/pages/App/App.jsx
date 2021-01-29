@@ -12,13 +12,21 @@ import DiscoverPage from '../DiscoverPage/DiscoverPage';
 import PlaylistsPage from '../PlaylistsPage/PlaylistsPage';
 import PlaylistPage from '../PlaylistPage/PlaylistPage';
 import NavBar from '../../components/NavBar/NavBar';
+// import PlayerBar from '../../components/PlayerBar/PlayerBar';
+import PlayerBar from '../../components/PlayerBar/PlayerBar';
 
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [allPlaylists, setAllPlaylists] = useState([]);
   const [thisPlaylist, setThisPlaylist] = useState([]);
-  const [playing, setPlaying] = useState(false);
-  const [onProgress, setOnProgress] = useState();
+
+
+  //player 
+  const [url, setUrl] = useState(null);
+  const [played, setPlayed] = useState(0);
+  const [loaded, setLoaded] = useState(0);
+  const [player, setPlayer] = useState(null);
+  // const [onProgress, setOnProgress] = useState();
   // const [onePlaylists, setOnePlaylists] = useState([]);
   useEffect(() => {
     async function getAllPlaylists() {
@@ -77,9 +85,21 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
 
     }
   }  
-  function pausevid() {
-    setPlaying(true);
+
+  const load = (url) => {
+    setUrl(url);
+    setPlayed(0);
+    player.current.seekTo(0)
+    setLoaded(0);
+    // setPlaying(!playing)
+    // this.setState({ playing: !playing })
   }
+
+  // const handleDuration = (duration) => {
+    
+  //   console.log('onDuration', duration)
+  //   setDuration(duration)
+  // }
   
   async function handleCreatePlaylist(newPlaylist) {
 
@@ -93,9 +113,10 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
       { user ?
         <>
           {/* <div onClick={handleGetAllPlaylist}>click me</div> */}
-          <button onClick={pausevid}>pause vid</button>
+          {/* <button onClick={pausevid}>pause vid</button>
+          <button onClick={playvid}>play vid</button> */}
           <NavBar user={user} setUser={setUser} allPlaylist={allPlaylists} handleCreatePlaylist={handleCreatePlaylist} handleGetOnePlaylist={handleGetOnePlaylist} />
-          <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing={playing} onProgress={onProgress}/>
+          {/* <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing={playing} onDuration={handleDuration}/> */}
           <Switch>
             <Route path="/charts">
               <ChartsPage />
@@ -110,10 +131,11 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
               <PlaylistsPage allPlaylist={allPlaylists} handleDeletePlaylist={handleDeletePlaylist}/>
             </Route>
             <Route path="/playlist">
-              <PlaylistPage thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
+              <PlaylistPage load={load} thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
             </Route>
             <Redirect to="/discover" />
           </Switch>
+          <PlayerBar load = {load}url={url} setUrl={setUrl} played={played} setPlayed={setPlayed} player={player} setPlayer={setPlayer} loaded={loaded} setLoaded={setLoaded} />
 
         </>
         :

@@ -7,7 +7,7 @@ import './PlaylistPage.css';
 
 
 
-export default function PlaylistPage({ thisPlaylist, setThisPlaylist, handleRemoveFromPlaylist, handleAddToPlaylist, allPlaylist }) {
+export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handleRemoveFromPlaylist, handleAddToPlaylist, allPlaylist }) {
 
 
   function isPlainObject(o) {
@@ -90,7 +90,7 @@ export default function PlaylistPage({ thisPlaylist, setThisPlaylist, handleRemo
                           <>
                             <ContextMenuTrigger id={idx} >
                               {/* ref={c => contextTrigger = c} */}
-                              <li className="table-row" key={idx} >
+                              <li className="table-row" key={idx} onClick={() => load('https://www.youtube.com/watch?v=' + song.song_id)}>
                                 {/* <li className="table-row" key={idx} onClick={hideMenu}> */}
                                 <div className="col col-1" data-label="Job Id">{song.song_id}</div>
                                 <div className="col col-2" data-label="Customer Name">{song.song_name}</div>

@@ -1,0 +1,40 @@
+.player-control-bar {
+    color: white;
+    width: 100%;
+    -webkit-transition: bottom .3s ease, background-color .3s ease;
+    -o-transition: bottom .3s ease, background-color .3s ease;
+    transition: bottom .3s ease, background-color .3s ease;
+    height: 60px;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    z-index: 10;
+}
+
+.song-info {
+    float: left;
+}
+
+.volume {
+    float: right;
+}
+
+.slider {
+    float: right;
+    height: 60px;
+    font-size: 22px;
+}
+
+.controls {
+    display: flex;
+}
+
+.volume, .controls {
+    float: right;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+    text-align: center;
+}
