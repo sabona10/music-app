@@ -3,11 +3,12 @@
 // import '@brainhubeu/react-carousel/lib/style.css';
 import './PlaylistsPage.css'
 import { Link } from 'react-router-dom';
+// import { deletePlaylist } from '../../utilities/playlists-api';
 
 // import SimpleSlider from '../../components/Carousel/Carousel';
 
 
-export default function PlaylistsPage({ allPlaylist}) {
+export default function PlaylistsPage({ allPlaylist, handleDeletePlaylist}) {
 
   // async function handleCheckToken() {
   //   const expDate = await usersService.checkToken();
@@ -21,7 +22,7 @@ export default function PlaylistsPage({ allPlaylist}) {
           <h1>All Your Playlist</h1>
           <ul className="cards">
           {allPlaylist.map(playlist =>
-            <li className="cards_item">
+            <li className="cards_item" key={playlist._id}>
               <div className="card">
                 <div className="card_image">
                   <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA"  alt='' />
@@ -36,6 +37,7 @@ export default function PlaylistsPage({ allPlaylist}) {
                   ><h2 className="card_title">{playlist.list_Name}</h2></Link>
                   {/* <h2 className="card_title">{playlist.list_Name}</h2> */}
                     <p className="card_text">{playlist.songs.length} songs</p>
+                  <button onClick={() => handleDeletePlaylist(playlist._id)}>Delete Playlist</button>
                   </div>
                 </div>
             </li>

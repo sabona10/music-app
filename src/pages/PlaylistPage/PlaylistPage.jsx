@@ -1,15 +1,43 @@
-// import * as usersService from '../../utilities/users-service';
-// import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
-// import '@brainhubeu/react-carousel/lib/style.css';
-import './PlaylistPage.css'
+// import React from 'react';
+import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from "react-contextmenu";
 import { useLocation, Redirect } from 'react-router-dom';
-// import playlist from '../../../models/playlist';
-// import {useEffect} from 'react';
+import './PlaylistPage.css';
+// import React from "react";
+// import ReactDOM from "react-dom";
 
-// import SimpleSlider from '../../components/Carousel/Carousel';
 
 
-export default function PlaylistPage({handleAddToPlaylist}) {
+export default function PlaylistPage({ thisPlaylist, setThisPlaylist, handleRemoveFromPlaylist, handleAddToPlaylist, allPlaylist }) {
+
+
+  function isPlainObject(o) {
+    return (o === null || Array.isArray(o) || typeof o == 'function' || o.constructor === Date) ?
+      false
+      : (typeof o == 'object');
+  }
+  // function handleClick(e, data) {
+  //   console.log(data.foo);
+  // }
+  // let contextTrigger = null;
+
+  // const toggleMenu = e => {
+  //   console.log(e);
+  //   console.log(Object.keys(contextTrigger.handleContextMenu))
+  //   // console.log(e.which)
+  //   if (contextTrigger) {
+  //     contextTrigger.handleContextClick(e);
+  //     console.log(contextTrigger)
+  //     // contextTrigger.
+  //   }
+  // };
+  // const hideMenu = e => {
+  //   console.log(e);
+  //   // console.log(Object.keys(contextTrigger))
+  //   // if (contextTrigger) {
+  //   //   contextTrigger.handleContextClick(e);
+  //   //   // contextTrigger.
+  //   // }
+  // };
 
   // async function handleCheckToken() {
   //   const expDate = await usersService.checkToken();
@@ -20,58 +48,94 @@ export default function PlaylistPage({handleAddToPlaylist}) {
   //   <Redirect to="/discover" />
   //   // }, [])
   // }
-  
+
   // let playlist = {};
-  const { state } = useLocation()
-  // console.log(state)
-  if (state === undefined){
+  const { state } = useLocation();
+
+
+  // console.log(thisPlaylist.length)
+  if (state === undefined) {
     return <Redirect to="/discover" />
-  }else{
-    let playlist = state.playlist;
-    // console.log(playlist);
-    // const { state:{playlist} } = useLocation()
-    // state = { playlist } 
- 
-  // console.log(playlist);
-  // }
-  // console.log(playlist)
-  // const playlist = 
-  return (
-    <section>
-     
-      <div>
-        <div className="main">
-          <h1>One Playlist called {playlist.list_Name}</h1>
-          {
-            playlist.songs.length ? 
-            <ul className="cards">
-              <div className="container">
-                <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
-                <ul className="responsive-table">
-                  <li className="table-header">
-                    <div className="col col-1">Song Id</div>
-                    <div className="col col-2">Song Name</div>
-                    <div className="col col-3">Artist</div>
-                    <div className="col col-4">Duration</div>
-                  </li>
-                  {playlist.songs.map(song=>
-                  <li className="table-row">
-                    <div className="col col-1" data-label="Job Id">{song.song_id}</div>
-                    <div className="col col-2" data-label="Customer Name">{song.song_name}</div>
-                  <div className="col col-3" data-label="Amount">{song.artist}</div>
-                    <div className="col col-4" data-label="Payment Status">{song.duration} </div>
-                  </li>
-                    
-                    )}
-                </ul>
-                  <button onClick={() => handleAddToPlaylist(playlist._id, {
-                    song_id: 'QTw5B7YhaIQ',
-                    song_name: 'Be Prepared',
-                    duration: 2000,
-                    artist: 'jay'
-                  })}>Add something this to playlist 'abc'</button>
-              </div>
-            {/* {allPlaylist.map(playlist =>
+  } else {
+    let playlist = [];
+    if (thisPlaylist._id !== state.playlist._id) setThisPlaylist(state.playlist);
+    playlist = thisPlaylist;
+    if (!isPlainObject(thisPlaylist)) {
+      playlist = state.playlist;
+    }
+    return (
+      <section>
+
+        <div>
+          <div className="main">
+            <h1>One Playlist called {playlist.list_Name}</h1>
+            <div>
+
+
+
+            </div>
+            {
+              playlist.songs.length ?
+                <ul className="cards">
+                  <div className="container">
+                    <ul className="responsive-table">
+                      <li className="table-header">
+                        <div className="col col-1">Song Id</div>
+                        <div className="col col-2">Song Name</div>
+                        <div className="col col-3">Artist</div>
+                        <div className="col col-4">Duration</div>
+                      </li>
+                      {playlist.songs.map((song, idx) => {
+                        return (
+                          <>
+                            <ContextMenuTrigger id={idx} >
+                              {/* ref={c => contextTrigger = c} */}
+                              <li className="table-row" key={idx} >
+                                {/* <li className="table-row" key={idx} onClick={hideMenu}> */}
+                                <div className="col col-1" data-label="Job Id">{song.song_id}</div>
+                                <div className="col col-2" data-label="Customer Name">{song.song_name}</div>
+                                <div className="col col-3" data-label="Amount">{song.artist}</div>
+                                <div className="col col-4" data-label="Payment Status">{song.duration} </div>
+                                {/* <button onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>remove</button> */}
+                              </li>
+                              {/* <button onClick={toggleMenu}>☰</button> */}
+                              {/* <div className="well">Right click to see the menu</div> */}
+                            </ContextMenuTrigger>
+
+                            <ContextMenu id={idx} >
+                              <MenuItem data={{ foo: 'bar' }} onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>
+                                remove from playlist
+                              </MenuItem>
+                              <MenuItem divider />
+                              <SubMenu title='Add to Playlist'>
+                                {allPlaylist.map(playlist =>
+                                  <MenuItem key={playlist._id} onClick={() => handleAddToPlaylist(playlist._id, {
+                                    song_id: song.song_id,
+                                    song_name: song.song_name,
+                                    duration: song.duration,
+                                    artist: song.artist
+                                  })} data={{ foo: 'bar' }} >{playlist.list_Name}</MenuItem>
+                                  // <MenuItem onClick={handleClick} data={{ foo: 'subitem 2' }}>playlist 2</MenuItem>
+                                )}
+                              </SubMenu>
+                              {/* <MenuItem data={{ foo: 'bar' }} onClick={handleClick}>
+                                ContextMenu Item 3
+                              </MenuItem> */}
+                            </ContextMenu>
+
+                          </>
+                        )
+
+                      })}
+                    </ul>
+                    {/* <button onClick={() => handleAddToPlaylist(playlist._id, {
+                      song_id: 'QTw5B7YhaIQ',
+                      song_name: 'Be Prepared',
+                      duration: 2000,
+                      artist: 'jay'
+                    })}>Add something this to playlist 'abc'</button> */}
+                  </div>
+                  {/* {allPlaylist.map(playlist =>
               <li className="cards_item">
                 <div className="card">
                   <div className="card_image">
@@ -84,27 +148,23 @@ export default function PlaylistPage({handleAddToPlaylist}) {
                   </div>
               </li>
             )} */}
-            </ul>
-          
-            :
-              <div><div> No playlists to show</div> <div><button onClick={() => handleAddToPlaylist(playlist._id, {
-                song_id: 'QTw5B7YhaIQ',
-                song_name: 'Be Prepared',
-                duration: 2000,
-                artist: 'jay'})}>Add something this to playlist 'abc'</button></div></div>      }
+                </ul>
+
+                :
+                <h3> This playlist is Empty</h3>}
+          </div>
+
         </div>
 
-      </div>
 
-
-      {/* <h1>DiscoverPage</h1>
+        {/* <h1>DiscoverPage</h1>
       <button onClick={handleCheckToken}>Check When My Login Expires</button>
       <div style={{ width: 75 + '%', float: 'right' }}>
         <SimpleSlider>
         </SimpleSlider>
 
       </div> */}
-    </section>
-  );
+      </section>
+    );
   }
 }

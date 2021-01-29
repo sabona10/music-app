@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
+import ReactPlayer, {playing} from 'react-player/youtube'
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import * as playlistApi from '../../utilities/playlists-api';
@@ -15,6 +16,9 @@ import NavBar from '../../components/NavBar/NavBar';
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [allPlaylists, setAllPlaylists] = useState([]);
+  const [thisPlaylist, setThisPlaylist] = useState([]);
+  const [playing, setPlaying] = useState(false);
+  const [onProgress, setOnProgress] = useState();
   // const [onePlaylists, setOnePlaylists] = useState([]);
   useEffect(() => {
     async function getAllPlaylists() {
@@ -35,24 +39,46 @@ export default function App() {
     // setAllPlaylists(playlists);
     console.log(playlists);
   }
-  async function handleAddToPlaylist(playlistId, newSong) {
+  async function handleDeletePlaylist(playlistId) {
+    await playlistApi.deletePlaylist(playlistId);
+    const playlists = await playlistApi.getAll(getUser());
+    setAllPlaylists(playlists);
+    // setAllPlaylists(playlists);
+    // console.log(playlists);
+  }
+async function handleAddToPlaylist(playlistId, newSong) {
+  console.log(newSong)
     for (var i = 0; i < allPlaylists.length; i++) {
       if (allPlaylists[i]._id === playlistId) {
         
         let newPlaylist = allPlaylists[i];
         newPlaylist.songs = [...newPlaylist.songs, newSong];
         const playlists = await playlistApi.addOneToPlaylist(newPlaylist);
-
+        if(thisPlaylist && thisPlaylist._id === playlistId) setThisPlaylist(playlists);
         allPlaylists[i] = playlists;
         setAllPlaylists(allPlaylists);
         break;
       }
 
-      // console.log((i + 1) + " --> " + allPlaylists[i])
     }
-    // console.log("added to " +playlistId)
-    // setAllPlaylists(allPlaylists.)
-    // console.log(playlists);
+  }  
+async function handleRemoveFromPlaylist(playlistId, songPosition) {
+    for (var i = 0; i < allPlaylists.length; i++) {
+      if (allPlaylists[i]._id === playlistId) {
+        
+        let newPlaylist = allPlaylists[i];
+        newPlaylist.songs.splice(songPosition,1);
+        const playlists = await playlistApi.addOneToPlaylist(newPlaylist);
+        if(thisPlaylist && thisPlaylist._id === playlistId) setThisPlaylist(playlists);
+        allPlaylists[i] = playlists;
+        setAllPlaylists(allPlaylists);
+        break;
+      }
+
+    }
+  }  
+  function pausevid() {
+    setPlaying(true);
   }
   
   async function handleCreatePlaylist(newPlaylist) {
@@ -67,7 +93,9 @@ export default function App() {
       { user ?
         <>
           {/* <div onClick={handleGetAllPlaylist}>click me</div> */}
+          <button onClick={pausevid}>pause vid</button>
           <NavBar user={user} setUser={setUser} allPlaylist={allPlaylists} handleCreatePlaylist={handleCreatePlaylist} handleGetOnePlaylist={handleGetOnePlaylist} />
+          <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing={playing} onProgress={onProgress}/>
           <Switch>
             <Route path="/charts">
               <ChartsPage />
@@ -79,13 +107,14 @@ export default function App() {
               <GenresPage />
             </Route>
             <Route path="/playlists">
-              <PlaylistsPage allPlaylist={allPlaylists} />
+              <PlaylistsPage allPlaylist={allPlaylists} handleDeletePlaylist={handleDeletePlaylist}/>
             </Route>
             <Route path="/playlist">
-              <PlaylistPage handleAddToPlaylist={handleAddToPlaylist} />
+              <PlaylistPage thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
             </Route>
             <Redirect to="/discover" />
           </Switch>
+
         </>
         :
         <AuthPage setUser={setUser} />

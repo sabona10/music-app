@@ -35,7 +35,7 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
           <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists">Playlists</NavLink></li>
           <ul className="playlist">
             {allPlaylist.map(playlist =>
-              <li>
+              <li key={playlist._id}>
                 <Link
                   to={{
                     pathname: '/playlist',
@@ -43,7 +43,6 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
                   }}
                   key= {playlist._id}
                 ><span>{playlist.list_Name}</span></Link>
-                {/* <a href={() => false}><span>{playlist.list_Name}</span></a> */}
               </li>
             )}
             <li><div className="inputField">
@@ -56,7 +55,7 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
             </div></li>
           </ul>
 
-          <li><a href={() => false}><span>Welcome, {user.name}</span></a></li>
+          <li><Link to=""><span>Welcome, {user.name}</span></Link></li>
           <li><Link to="" onClick={handleLogOut}>Log Out</Link></li>
 
         </ul>

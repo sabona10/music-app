@@ -13,7 +13,7 @@
         height: auto;
     }
 
-    h1 {
+    h1,h2,h3 {
         color: white;
     }
 
@@ -152,3 +152,4 @@
             text-align: right;
         }
     }
+    
