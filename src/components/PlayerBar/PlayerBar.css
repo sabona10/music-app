@@ -6,7 +6,7 @@
     width: 100%;
     bottom: 0;
     display: inline-flex;
-    position: absolute;
+    position: fixed;
     background-color: rgb(199 197 197 / 37%);
     left: 0;
     font-size: 14px;

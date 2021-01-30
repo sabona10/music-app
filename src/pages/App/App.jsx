@@ -11,6 +11,7 @@ import GenresPage from '../GenresPage/GenresPage';
 import DiscoverPage from '../DiscoverPage/DiscoverPage';
 import PlaylistsPage from '../PlaylistsPage/PlaylistsPage';
 import PlaylistPage from '../PlaylistPage/PlaylistPage';
+import ResultPage from '../ResultPage/ResultPage';
 import NavBar from '../../components/NavBar/NavBar';
 // import PlayerBar from '../../components/PlayerBar/PlayerBar';
 import PlayerBar from '../../components/PlayerBar/PlayerBar';
@@ -92,6 +93,12 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
     }
   }  
 
+async function handleGetSearchSuggestions(term) {
+      const suggestions = await browseApi.getSuggestion(term);
+      
+    console.log(suggestions)
+  }  
+
   const load = (url) => {
     setUrl(url);
     setPlayed(0);
@@ -118,7 +125,7 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
     <main className="App">
       { user ?
         <>
-          {/* <div onClick={handleGetAllPlaylist}>click me</div> */}
+          <div onClick={()=>handleGetSearchSuggestions('justin')}>click me</div>
           {/* <button onClick={pausevid}>pause vid</button>
           <button onClick={playvid}>play vid</button> */}
           <NavBar user={user} setUser={setUser} allPlaylist={allPlaylists} handleCreatePlaylist={handleCreatePlaylist} handleGetOnePlaylist={handleGetOnePlaylist} />
@@ -132,6 +139,9 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
             </Route>
             <Route path="/genres">
               <GenresPage />
+            </Route>
+            <Route path="/result">
+              <ResultPage load={load} thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
             </Route>
             <Route path="/playlists">
               <PlaylistsPage allPlaylist={allPlaylists} handleDeletePlaylist={handleDeletePlaylist}/>

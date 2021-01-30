@@ -4,8 +4,38 @@
     max-width: 320px;
     width: 25%;
     height: 100vh;
+    overflow: auto;
     background: #312450;
     font-size: 0.65em;
+}
+
+.header {
+    float: right;
+    width: 75%;
+    position: fixed;
+    right: 0;
+}
+
+.suggestions {
+    border-top: 2px solid #999;
+    width: 60%;
+    margin: 10px auto;
+    background: #333;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.suggestions>div {
+    padding: 15px;
+    font-size: 20px;
+    color: #fff;
+    border-top: 1px solid #666;
+    cursor: pointer;
+}
+
+.suggestions>div:hover {
+    background-color: #1e4dd4;
 }
 
 .nav {

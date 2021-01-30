@@ -1,12 +1,20 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import * as userService from '../../utilities/users-service';
+import * as browseApi from '../../utilities/browse-api';
 import '../PlayerBar/PlayerBarIconsCss/flaticon.css';
 import './NavBar.css'
 
 export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylist }) {
   const [playlistName, setPlaylistName] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [searchDisabled, setSearchDisabled] = useState(true);
+  const [suggestions, setSuggestions] = useState([]);
+  // const [results, setResults] = useState({});
+
+
   function handleLogOut() {
     userService.logOut();
     setUser(null);
@@ -26,8 +34,83 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
     handleCreatePlaylist(newPlaylist);
     setPlaylistName('')
   }
+  // const [timer, setTimer] = useState(2);
+
+  const handleSearchChange = (e) => {
+    if (e.target.value.length > 1) setSearchDisabled(false);
+    // console.log(timer);
+    setSearchTerm(e.target.value)
+  }
+
+  // const [value, setValue] = useState("");
+
+  // const handleOnChange = (event) => {
+  //   setValue(event.target.value);
+  // };
+  async function handleGetSearchSuggestions(term) {
+    if(term.length>1){
+      const suggestions = await browseApi.getSuggestion(term);
+      setSuggestions(suggestions);
+      console.log(suggestions)
+    }
+  } 
+  const history = useHistory();
+
+  async function handleGetSearchResults(term) {
+    if(term.length>1){
+      const results = await browseApi.getResult(term);
+      history.push({
+        pathname: "/result",
+        state: { playlist: results },
+      });
+      // setResults(results);
+      // console.log(results)
+    }
+    setSearchTerm('')
+    setSuggestions([])
+  } 
+  // var playlis = {yes:'yes'}
+  // function ress() {
+    
+  //   history.push({
+  //     pathname: "/result",
+  //     state: { playlist:playlis },
+  //   });
+    
+  // }
+  useEffect(() => {
+    const timeoutId = setTimeout(() => handleGetSearchSuggestions(searchTerm), 500);
+    return () => clearTimeout(timeoutId);
+  }, [searchTerm]);
+  
+  
+  
+  // var ttimer;
+  const handleSearchSubmit = (e) => {
+    // console.log(e)
+    if (e.key === "Enter") handleGetSearchResults(searchTerm);
+  }
 
   return (
+    <>
+      <div className="header">
+        {/* <h1 onClick={()=>handleGetSearchResults('despacito')}>clickme</h1> */}
+        <div className="inputField">
+          <input
+            name="name"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            type="text" placeholder="search for song"
+            onKeyDown={handleSearchSubmit} />
+          <button onClick={handleSearchSubmit} disabled={searchDisabled} type='submit'>+</button>
+        </div>
+        
+          <div className="suggestions">
+            {suggestions.map(suggestion=>
+              <div onClick={() => handleGetSearchResults(suggestion)}>{suggestion}</div>
+              )}
+          </div>
+      </div>
     <aside className="sidebar">
       <nav className="nav">
         <ul>
@@ -63,13 +146,6 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
         </ul>
       </nav>
     </aside>
-    // <nav>
-    //   <NavLink exact activeStyle={{color: 'white'}} to="/orders">Order History</NavLink>
-    //   &nbsp; | &nbsp;
-    //   <NavLink exact activeStyle={{backgroundColor: 'yellow'}} to="/orders/new">New Order</NavLink>
-    //   &nbsp; | &nbsp;
-    //   <span>Welcome, {user.name}</span>
-    //   &nbsp;&nbsp;<Link to="" onClick={handleLogOut}>Log Out</Link>
-    // </nav>
+    </>
   );
 }
