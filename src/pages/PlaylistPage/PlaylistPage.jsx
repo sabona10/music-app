@@ -2,6 +2,7 @@
 import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from "react-contextmenu";
 import { useLocation, Redirect } from 'react-router-dom';
 import './PlaylistPage.css';
+import Duration from '../../components/PlayerBar/Duration'
 // import React from "react";
 // import ReactDOM from "react-dom";
 
@@ -92,10 +93,10 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                               {/* ref={c => contextTrigger = c} */}
                               <li className="table-row" key={idx} onClick={() => load('https://www.youtube.com/watch?v=' + song.song_id)}>
                                 {/* <li className="table-row" key={idx} onClick={hideMenu}> */}
-                                <div className="col col-1" data-label="Job Id">{song.song_id}</div>
-                                <div className="col col-2" data-label="Customer Name">{song.song_name}</div>
-                                <div className="col col-3" data-label="Amount">{song.artist}</div>
-                                <div className="col col-4" data-label="Payment Status">{song.duration} </div>
+                                <div className="col col-1">{song.song_id}</div>
+                                <div className="col col-2">{song.song_name}</div>
+                                <div className="col col-3">{song.artist}</div>
+                                <div className="col col-4">{<Duration seconds={song.duration / 1000} />} </div>
                                 {/* <button onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>remove</button> */}
                               </li>
                               {/* <button onClick={toggleMenu}>☰</button> */}
@@ -103,7 +104,10 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                             </ContextMenuTrigger>
 
                             <ContextMenu id={idx} >
-                              <MenuItem data={{ foo: 'bar' }} onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>
+                              <MenuItem onClick={() => load('https://www.youtube.com/watch?v=' + song.videoId)}>
+                                Play
+                              </MenuItem>
+                              <MenuItem onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>
                                 remove from playlist
                               </MenuItem>
                               <MenuItem divider />
@@ -114,7 +118,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                                     song_name: song.song_name,
                                     duration: song.duration,
                                     artist: song.artist
-                                  })} data={{ foo: 'bar' }} >{playlist.list_Name}</MenuItem>
+                                  })} >{playlist.list_Name}</MenuItem>
                                   // <MenuItem onClick={handleClick} data={{ foo: 'subitem 2' }}>playlist 2</MenuItem>
                                 )}
                               </SubMenu>

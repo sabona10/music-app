@@ -141,7 +141,7 @@ async function handleGetSearchSuggestions(term) {
               <GenresPage />
             </Route>
             <Route path="/result">
-              <ResultPage load={load} thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
+              <ResultPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
             </Route>
             <Route path="/playlists">
               <PlaylistsPage allPlaylist={allPlaylists} handleDeletePlaylist={handleDeletePlaylist}/>

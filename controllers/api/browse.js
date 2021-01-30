@@ -22,10 +22,16 @@ async function mainIndex(req, res) {
 async function result(req, res) {
     api.initalize() // Retrieves Innertube Config
         .then(info => {
-            api.search(req.params.id, "song").then(result => {
+            api.search(req.params.id).then(result => {
+                let newresult = {content:[]}
+                for (let i = 0; i < result.content.length; i++) {
+                    const element = result.content[i];
+                    if (element.type === 'video' || element.type === 'song') newresult.content.push(element)
+                    
+                }
                 //result is array [..]
                 // console.log(result);
-                res.status(200).json(result);
+                res.status(200).json(newresult);
             })
         })
     // const puppies = await Playlist.find({});

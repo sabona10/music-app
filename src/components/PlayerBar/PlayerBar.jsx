@@ -172,7 +172,7 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
                         <span className='next flaticon-next'></span>
                         <span className='loop'>
                             {/* <input id='loop' type='checkbox' checked={loop} onChange={handleToggleLoop} /> */}
-                            <span onClick={handleToggleLoop} className={loop ? 'flaticon-arrow-loop' : 'flaticon-arrow-loop bold' }></span> 
+                            <span onClick={handleToggleLoop} className={!loop ? 'flaticon-arrow-loop' : 'flaticon-arrow-loop bold' }></span> 
                             </span>
                     </div>
                     <div className='slider'>

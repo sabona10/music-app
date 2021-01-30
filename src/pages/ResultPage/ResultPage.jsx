@@ -8,7 +8,7 @@ import './PlaylistPage.css';
 
 
 
-export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handleRemoveFromPlaylist, handleAddToPlaylist, allPlaylist }) {
+export default function PlaylistPage({load,  handleAddToPlaylist, allPlaylist }) {
 
 
   function isPlainObject(o) {
@@ -58,12 +58,12 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
   if (state === undefined) {
     return <Redirect to="/discover" />
   } else {
-    let playlist = [];
+    let playlist ;
     // if (thisPlaylist._id !== state.playlist._id) setThisPlaylist(state.playlist);
-    playlist = thisPlaylist;
-    if (!isPlainObject(thisPlaylist)) {
-      playlist = state.playlist;
-    }
+    // playlist = thisPlaylist;
+    // if (!isPlainObject(thisPlaylist)) {
+    // }
+    playlist = state.playlist;
     // console.log(playlist);
     return (
       <section>
@@ -88,13 +88,14 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                         <div className="col col-4">Duration</div>
                       </li>
                       {playlist.content.map((song, idx) => {
+                        // console.log(song);
                         return (
                           <>
                             <ContextMenuTrigger id={idx} >
                               <li className="table-row" key={idx} onClick={() => load('https://www.youtube.com/watch?v=' + song.videoId)}>
                                 <div className="col col-1" data-label="Job Id">{song.videoId}</div>
                                 <div className="col col-2" data-label="Customer Name">{song.name}</div>
-                                <div className="col col-3" data-label="Amount">{song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")}</div>
+                                <div className="col col-3" data-label="Amount">{song.artist ? (song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")):song.author}</div>
                                 <div className="col col-4" data-label="Payment Status">{<Duration seconds={song.duration/1000}/>} </div>
                               </li>
                             </ContextMenuTrigger>
@@ -110,7 +111,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                                     song_id: song.videoId,
                                     song_name: song.name,
                                     duration: song.duration,
-                                    artist: song.artist.name
+                                    artist: song.artist ? (song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")):song.author
                                   })} data={{ foo: 'bar' }} >{playlist.list_Name}</MenuItem>
                                 )}
                               </SubMenu>
