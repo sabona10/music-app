@@ -3,6 +3,8 @@ import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from "react-contex
 import { useLocation, Redirect } from 'react-router-dom';
 import './PlaylistPage.css';
 import Duration from '../../components/PlayerBar/Duration'
+import Banner from '../../components/Banner/Banner'
+import { useEffect, useState } from "react";
 // import React from "react";
 // import ReactDOM from "react-dom";
 
@@ -52,50 +54,90 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
 
   // let playlist = {};
   const { state } = useLocation();
+  const [playlistCover, setPlaylistCover] = useState(false)
+  useEffect(() => {
+    setPlaylistCover(false);
 
+  }, [state])
+  const epochs = [
+    ['year', 31536000],
+    ['month', 2592000],
+    ['day', 86400],
+    ['hour', 3600],
+    ['minute', 60],
+    ['second', 1]
+  ];
 
+  const getDuration = (timeAgoInSeconds) => {
+    for (let [name, seconds] of epochs) {
+      const interval = Math.floor(timeAgoInSeconds / seconds);
+      if (interval >= 1) {
+        return {
+          interval: interval,
+          epoch: name
+        };
+      }
+    }
+  };
+
+  const timeAgo = (date) => {
+    const timeAgoInSeconds = Math.floor((new Date() - new Date(date)) / 1000);
+    const { interval, epoch } = getDuration(timeAgoInSeconds+2);
+    const suffix = interval === 1 ? '' : 's';
+    return `${interval} ${epoch}${suffix} ago`;
+  };
   // console.log(thisPlaylist.length)
   if (state === undefined) {
     return <Redirect to="/discover" />
   } else {
+    
     let playlist = [];
     if (thisPlaylist._id !== state.playlist._id) setThisPlaylist(state.playlist);
     playlist = thisPlaylist;
     if (!isPlainObject(thisPlaylist)) {
       playlist = state.playlist;
     }
+    // console.log(playlist)
     return (
-      <section>
+      <section className="playllist">
 
         <div>
           <div className="main">
-            <h1>One Playlist called {playlist.list_Name}</h1>
-            <div>
 
 
-
-            </div>
+            {/* <h1>One Playlist called dd{playlist.list_Name}</h1> */}
+            
             {
               playlist.songs.length ?
+              <>
+              {}
+                  <Banner name={playlist.list_Name} author={playlist.author_name} image={playlistCover ? playlistCover : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA'} />
+
                 <ul className="cards">
                   <div className="container">
                     <ul className="responsive-table">
                       <li className="table-header">
-                        <div className="col col-1">Song Id</div>
-                        <div className="col col-2">Song Name</div>
-                        <div className="col col-3">Artist</div>
+                        <div className="col col-1">Title</div>
+                        <div className="col col-2">Artist</div>
+                        <div className="col col-3">Added</div>
                         <div className="col col-4">Duration</div>
                       </li>
                       {playlist.songs.map((song, idx) => {
+                          if(!playlistCover && song.thumbnail.length) setPlaylistCover(song.thumbnail)
                         return (
                           <>
                             <ContextMenuTrigger id={idx} >
                               {/* ref={c => contextTrigger = c} */}
-                              <li className="table-row" key={idx} onClick={() => load('https://www.youtube.com/watch?v=' + song.song_id)}>
+                              <li className="table-row" key={idx} onClick={() => load({
+                                title: song.song_name,
+                                artist: song.artist,
+                                url: 'https://www.youtube.com/watch?v=' + song.song_id
+                              })}>
                                 {/* <li className="table-row" key={idx} onClick={hideMenu}> */}
-                                <div className="col col-1">{song.song_id}</div>
-                                <div className="col col-2">{song.song_name}</div>
-                                <div className="col col-3">{song.artist}</div>
+                                <div className="col col-1">{song.song_name}</div>
+                                <div className="col col-2">{song.artist}</div>
+                                {/* <div className="col col-3">{song.created_at}</div> */}
+                                <div className="col col-3">{song.created_at.length ? timeAgo(parseInt(song.created_at)): ''}</div>
                                 <div className="col col-4">{<Duration seconds={song.duration / 1000} />} </div>
                                 {/* <button onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>remove</button> */}
                               </li>
@@ -104,7 +146,11 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                             </ContextMenuTrigger>
 
                             <ContextMenu id={idx} >
-                              <MenuItem onClick={() => load('https://www.youtube.com/watch?v=' + song.videoId)}>
+                              <MenuItem onClick={() => load({
+                                title: song.song_name,
+                                artist: song.artist,
+                                url: 'https://www.youtube.com/watch?v=' + song.song_id
+                              })}>
                                 Play
                               </MenuItem>
                               <MenuItem onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>
@@ -117,6 +163,8 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                                     song_id: song.song_id,
                                     song_name: song.song_name,
                                     duration: song.duration,
+                                    created_at: Date.now(),
+                                    thumbnail: song.thumbnail ? song.thumbail : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA',
                                     artist: song.artist
                                   })} >{playlist.list_Name}</MenuItem>
                                   // <MenuItem onClick={handleClick} data={{ foo: 'subitem 2' }}>playlist 2</MenuItem>
@@ -153,7 +201,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
               </li>
             )} */}
                 </ul>
-
+              </>
                 :
                 <h3> This playlist is Empty</h3>}
           </div>

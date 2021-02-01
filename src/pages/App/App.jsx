@@ -20,17 +20,27 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [allPlaylists, setAllPlaylists] = useState([]);
   const [thisPlaylist, setThisPlaylist] = useState([]);
+  const [browsePlaylists, setBrowsePlaylists] = useState([]);
+  const [playing, setPlaying] = useState(true);
+  const [nowPlaying, setNowPlaying] = useState({
+    title:'',
+    artist:''
+  })
+  
+  // const [chartPlaylist, setChartPlaylist] = useState([]);
+
 
 
   //player 
   const [url, setUrl] = useState(null);
   const [played, setPlayed] = useState(0);
   const [loaded, setLoaded] = useState(0);
-  const [player, setPlayer] = useState(null);
+  // const [player, setPlayer] = useState(null);
 
   const history = useHistory();
   // const [onProgress, setOnProgress] = useState();
   // const [onePlaylists, setOnePlaylists] = useState([]);
+ 
   useEffect(() => {
     async function getAllPlaylists() {
       console.log(user);
@@ -39,10 +49,29 @@ export default function App() {
       console.log(playlists);
       
     }
+    async function getBrowsePlaylists() {
+      // console.log(user);
+      const playlists = await playlistApi.getAll('admin');
+      setBrowsePlaylists(playlists);
+      // console.log(playlists);
+      
+    }
+
     if(user){
+      getBrowsePlaylists();
       getAllPlaylists();
     }
   }, [history,user])
+  // useEffect(()=>{
+  //   async function getChartPlaylists() {
+  //     // console.log(user);
+  //     const chartplaylists = await playlistApi.getOne('6015f53f4146db4c0859c538');
+  //     setChartPlaylist(chartplaylists);
+  //     // console.log(playlists);
+
+  //   }
+  //   return getChartPlaylists();
+  // },[])
   // console.log(user);
   async function handleGetAllPlaylist() {
     const playlists = await playlistApi.getAll(user);
@@ -100,11 +129,15 @@ async function handleGetSearchSuggestions(term) {
   }  
 
   const load = (url) => {
-    setUrl(url);
-    setPlayed(0);
-    player.current.seekTo(0)
-    setLoaded(0);
-    // setPlaying(!playing)
+    setNowPlaying({
+      title: url.title,
+      artist: url.artist
+    })
+    setUrl(url.url);
+    // setPlayed(0);
+    // player.current.seekTo(0)
+    // setLoaded(0);
+    setPlaying(true)
     // this.setState({ playing: !playing })
   }
 
@@ -125,21 +158,21 @@ async function handleGetSearchSuggestions(term) {
     <main className="App">
       { user ?
         <>
-          <div onClick={()=>handleGetSearchSuggestions('justin')}>click me</div>
+          {/* <div onClick={()=>handleGetSearchSuggestions('justin')}>click me</div> */}
           {/* <button onClick={pausevid}>pause vid</button>
           <button onClick={playvid}>play vid</button> */}
-          <NavBar user={user} setUser={setUser} allPlaylist={allPlaylists} handleCreatePlaylist={handleCreatePlaylist} handleGetOnePlaylist={handleGetOnePlaylist} />
+          <NavBar user={user} setUser={setUser} allPlaylist={allPlaylists} handleCreatePlaylist={handleCreatePlaylist} />
           {/* <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing={playing} onDuration={handleDuration}/> */}
           <Switch>
             <Route path="/charts">
-              <ChartsPage />
+              <ChartsPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
             </Route>
             <Route path="/discover">
-              <DiscoverPage />
+              <DiscoverPage browsePlaylists={browsePlaylists} load={load}/>
             </Route>
-            <Route path="/genres">
+            {/* <Route path="/genres">
               <GenresPage />
-            </Route>
+            </Route> */}
             <Route path="/result">
               <ResultPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
             </Route>
@@ -147,11 +180,11 @@ async function handleGetSearchSuggestions(term) {
               <PlaylistsPage allPlaylist={allPlaylists} handleDeletePlaylist={handleDeletePlaylist}/>
             </Route>
             <Route path="/playlist">
-              <PlaylistPage load={load} thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
+              <PlaylistPage load={load} thisPlaylist={thisPlaylist} setThisPlaylist={setThisPlaylist} handleRemoveFromPlaylist={handleRemoveFromPlaylist} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}  />
             </Route>
             <Redirect to="/discover" />
           </Switch>
-          <PlayerBar load = {load}url={url} setUrl={setUrl} played={played} setPlayed={setPlayed} player={player} setPlayer={setPlayer} loaded={loaded} setLoaded={setLoaded} />
+          <PlayerBar load={load} url={url} setUrl={setUrl} played={played} setPlayed={setPlayed} loaded={loaded} setLoaded={setLoaded} playing={playing} setPlaying={setPlaying} nowPlaying={nowPlaying} setNowPlaying={setNowPlaying} />
 
         </>
         :

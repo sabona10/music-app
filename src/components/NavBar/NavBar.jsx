@@ -57,6 +57,8 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
   const history = useHistory();
 
   async function handleGetSearchResults(term) {
+    setSearchTerm('')
+    setSuggestions([])
     if(term.length>1){
       const results = await browseApi.getResult(term);
       history.push({
@@ -66,8 +68,7 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
       // setResults(results);
       // console.log(results)
     }
-    setSearchTerm('')
-    setSuggestions([])
+    
   } 
   // var playlis = {yes:'yes'}
   // function ress() {
@@ -79,7 +80,7 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
     
   // }
   useEffect(() => {
-    const timeoutId = setTimeout(() => handleGetSearchSuggestions(searchTerm), 500);
+    const timeoutId = setTimeout(() => handleGetSearchSuggestions(searchTerm), 400);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
   
@@ -93,30 +94,13 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
 
   return (
     <>
-      <div className="header">
-        {/* <h1 onClick={()=>handleGetSearchResults('despacito')}>clickme</h1> */}
-        <div className="inputField">
-          <input
-            name="name"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            type="text" placeholder="search for song"
-            onKeyDown={handleSearchSubmit} />
-          <button onClick={handleSearchSubmit} disabled={searchDisabled} type='submit'>+</button>
-        </div>
-        
-          <div className="suggestions">
-            {suggestions.map(suggestion=>
-              <div onClick={() => handleGetSearchResults(suggestion)}>{suggestion}</div>
-              )}
-          </div>
-      </div>
+     
     <aside className="sidebar">
       <nav className="nav">
         <ul>
           <li><NavLink exact activeStyle={{ color: 'white' }} to="/discover"> <span className='flaticon-window-of-four-rounded-squares'></span>  Discover</NavLink></li>
           <li><NavLink exact activeStyle={{ color: 'white' }} to="/charts"><span className='flaticon-statistics'></span> Top Charts</NavLink></li>
-          <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres"> <span className='flaticon-dj'></span> Genres</NavLink></li>
+          {/* <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres"> <span className='flaticon-dj'></span> Genres</NavLink></li> */}
           <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists"> <span className='flaticon-playlist-1'></span> Playlists</NavLink></li>
           <ul className="playlist">
             {allPlaylist.map(playlist =>
@@ -146,6 +130,25 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
         </ul>
       </nav>
     </aside>
+    
+     <div className="header">
+        {/* <h1 onClick={()=>handleGetSearchResults('despacito')}>clickme</h1> */}
+        <div className="inputField">
+          <input
+            name="name"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            type="text" placeholder="search for song"
+            onKeyDown={handleSearchSubmit} />
+          <button onClick={handleSearchSubmit} disabled={searchDisabled} type='submit'>Search</button>
+        </div>
+        
+          <div className="suggestions">
+            {suggestions.map(suggestion=>
+              <div onClick={() => handleGetSearchResults(suggestion)}>{suggestion}</div>
+              )}
+          </div>
+      </div>
     </>
   );
 }

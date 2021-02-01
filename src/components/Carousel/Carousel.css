@@ -1,0 +1,57 @@
+img.bimage {
+    position: absolute;
+    filter: blur(15px);
+    z-index: 99999;
+}
+
+span.bimage {
+    filter: blur(10px) brightness(0.5) grayscale(25%);
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    width: 260px;
+    height: 260px;
+}
+
+span.bimage img {
+    /* height: 100%; */
+    width: 260px;
+    height: 260px;
+    /* width: 100%; */
+    object-fit: cover;
+}
+
+.image {
+    height: 260px;
+    width: 260px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.image>img {
+    display: block;
+    /* margin-top: auto; */
+    width: inherit;
+    /* margin-bottom: auto; */
+}
+
+.card {
+    text-align: left;
+    color: white;
+}
+
+/* .card.title {
+    color: white;
+} */
+
+span.title {
+    font-size: 19px;
+}
+
+span.subtitle {
+    color: #8592c7;
+}

@@ -1,0 +1,86 @@
+/*Responsive table*/
+
+.simpletable {
+    width: 100%;
+    border-collapse: collapse;
+    /* background: #34495e; */
+    color: #f3f3f3;
+    border-spacing: 10px 10px;
+}
+
+.simpletable td, th {
+    padding: 6px;
+    text-align: left;
+}
+
+/* Zebra striping */
+
+/* .simpletable tr:nth-of-type(odd) {
+    background: #16a085;
+} */
+
+.simpletable td:first-child {
+    border-top-left-radius: 5px;
+    padding-left: 10px;
+    border-bottom-left-radius: 5px;
+}
+
+.simpletable td:last-child {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.spacer {
+    height: 8px;
+}
+
+.highligted {
+    background: #34495e;
+}
+
+.simpletable th {
+    /* background: #2c3e50; */
+    font-weight: bold;
+}
+
+img.sbimage {
+    position: absolute;
+    filter: blur(15px);
+    z-index: 99999;
+}
+
+span.sbimage {
+    filter: blur(10px) brightness(0.5) grayscale(25%);
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    /* width: 60px;
+    height: 60px; */
+}
+
+span.sbimage img {
+    /* height: 100%; */
+    width: 40px;
+    height: 50px;
+    /* width: 100%; */
+    object-fit: cover;
+}
+
+.simage {
+    height: 40px;
+    width: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.simage>img {
+    display: block;
+    /* margin-top: auto; */
+    z-index: 2;
+    width: inherit;
+    /* margin-bottom: auto; */
+}

@@ -1,26 +1,35 @@
 .sidebar {
-    position: fixed;
+    /* position: fixed; */
     min-width: 200px;
     max-width: 320px;
-    width: 25%;
-    height: 100vh;
-    overflow: auto;
+    /* width: 25%; */
+    /* height: 100vh; */
+    flex: 1 1 100%;
+    z-index: 11;
+    /* max-width: 300px; */
+    /* overflow: auto;
+    
     background: #312450;
-    font-size: 0.65em;
+    font-size: 0.65em; */
 }
 
 .header {
     float: right;
-    width: 75%;
+    width: 100%;
     position: fixed;
-    right: 0;
+    /* right: -168px; */
+    padding-left: 350px;
+    z-index: 10;
+    flex: 1 1 auto;
 }
 
 .suggestions {
-    border-top: 2px solid #999;
-    width: 60%;
+    /* border-top: 2px solid #999; */
+    width: 40%;
+    float: left;
+    text-align: left;
     margin: 10px auto;
-    background: #333;
+    background: rgba(4, 15, 36, 0.884);
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.4), 0 4px 4px rgba(0, 0, 0, 0.2);
@@ -35,10 +44,19 @@
 }
 
 .suggestions>div:hover {
-    background-color: #1e4dd4;
+    background-color: #3c559e86;
 }
 
 .nav {
+    /* position: relative; */
+    /* margin: 0 5%; */
+    position: fixed;
+    text-align: left;
+    overflow: auto;
+    background: #312450;
+    height: 100vh;
+    font-size: 0.65em;
+    /* font-weight: bold;
     position: relative;
     margin: 0 5%;
     text-align: left;
@@ -121,7 +139,7 @@ li.playlists a::after {
 }
 
 .inputField input {
-    width: 85%;
+    width: 90%;
     height: 100%;
     outline: none;
     border-radius: 3px;
@@ -139,7 +157,7 @@ li.playlists a::after {
 }
 
 .inputField button {
-    width: 50px;
+    min-width: 50px;
     height: 100%;
     border: none;
     color: #fff;

@@ -26,7 +26,8 @@ async function result(req, res) {
                 let newresult = {content:[]}
                 for (let i = 0; i < result.content.length; i++) {
                     const element = result.content[i];
-                    if (element.type === 'video' || element.type === 'song') newresult.content.push(element)
+                    // if (element.type === 'video' || element.type === 'song') newresult.content.push(element)
+                    if (element.type === 'song') newresult.content.push(element)
                     
                 }
                 //result is array [..]

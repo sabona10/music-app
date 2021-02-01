@@ -8,9 +8,10 @@ import ReactPlayer from 'react-player/youtube'
 import Duration from './Duration'
 
 
-export default function PlayerBar({ load, url, setUrl, played, setPlayed, player, setPlayer, loaded, setLoaded }) {
+export default function PlayerBar({ load, url, setUrl, played, setPlayed, loaded, setLoaded,playing,setPlaying,nowPlaying,setNowPlaying }) {
+    // console.log(nowPlaying);
     // const [url, setUrl] = useState(null);
-    const [playing, setPlaying] = useState(true);
+    // const [playing, setPlaying] = useState(true);
     const [volume, setVolume] = useState(0.8);
     const [muted, setMuted] = useState(false);
     // const [played, setPlayed] = useState(0);
@@ -19,7 +20,7 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
     const [loop, setLoop] = useState(false);
     const [seeking, setSeeking] = useState(false);
     const [state, setState] = useState(null);
-    // const [player, setPlayer ] =useState(null);
+    const [player, setPlayer ] =useState(null);
 
     // useEffect(load = (url) => {
     //     setUrl(url);
@@ -94,8 +95,9 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
     useEffect(() => {
         // console.log(ref.player)
         // const player = ref
+        ref.current.seekTo(played)
+        
         setPlayer(ref);
-        // ref.seekTo(parseFloat(e.target.value))
         // console.log(ref);
         // player = ref.player;
     }, [ref])
@@ -123,46 +125,45 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
 
     // }
     return (
-        <div className='app'>
-            <section className='section'>
-                <h1>ReactPlayer Demo</h1>
-                <div className='player-wrapper'>
-                    <ReactPlayer
-                        ref={ref}
-                        className='react-player'
-                        width='100%'
-                        height='100%'
-                        url={url}
-                        // pip={pip}
-                        playing={playing}
-                        // controls={controls}
-                        // light={light}
-                        loop={loop}
-                        // playbackRate={playbackRate}
-                        volume={volume}
-                        muted={muted}
-                        // onReady={() => console.log('onReady')}
-                        // onStart={() => console.log('onStart')}
-                        onPlay={handlePlay}
-                        // onEnablePIP={handleEnablePIP}
-                        // onDisablePIP={handleDisablePIP}
-                        onPause={handlePause}
-                        onBuffer={() => console.log('onBuffer')}
-                        onSeek={e => console.log('onSeek', e)}
-                        // onEnded={handleEnded}
-                        onError={e => console.log('onError', e)}
-                        onProgress={handleProgress}
-                        onDuration={handleDuration}
-                    />
-                </div>
-
-
+            <div className=''>
+                {/* <h1>ReactPlayer Demo</h1> */}
+               
                 <div className='player-control-bar'>
                     <div className='song-info'>
-                        <img src="" alt="" />
-                        <span>
-                            <span className='title'>Title</span>
-                            <span className='artist'>artist</span>
+                    <div className='player-wrapper'>
+                        <ReactPlayer
+                            ref={ref}
+                            className='react-player'
+                            width='100%'
+                            height='100%'
+                            url={url}
+                            // pip={pip}s
+                            playing={playing}
+                            // controls={controls}
+                            // light={light}
+                            loop={loop}
+                            // playbackRate={playbackRate}
+                            volume={volume}
+                            muted={muted}
+                            // onReady={() => console.log('onReady')}
+                            // onStart={() => console.log('onStart')}
+                            onPlay={handlePlay}
+                            // onEnablePIP={handleEnablePIP}
+                            // onDisablePIP={handleDisablePIP}
+                            onPause={handlePause}
+                            onBuffer={() => console.log('onBuffer')}
+                            onSeek={e => console.log('onSeek', e)}
+                            // onEnded={handleEnded}
+                            onError={e => console.log('onError', e)}
+                            onProgress={handleProgress}
+                            onDuration={handleDuration}
+                        />
+                    </div>
+
+
+                        <span className='player-detail'>
+                            <span className='playertitle'>{nowPlaying.title} </span>
+                        <span className='Playerartist'>{nowPlaying.artist}</span>
                         </span>
                     </div>
                     <div className='controls'>
@@ -211,9 +212,8 @@ export default function PlayerBar({ load, url, setUrl, played, setPlayed, player
                     onMouseUp={handleSeekMouseUp}
                 /></h3> */}
 
-            </section>
+            </div>
 
 
-        </div>
     )
 };

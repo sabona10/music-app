@@ -64,7 +64,7 @@ export default function PlaylistPage({load,  handleAddToPlaylist, allPlaylist })
     // if (!isPlainObject(thisPlaylist)) {
     // }
     playlist = state.playlist;
-    // console.log(playlist);
+    console.log(playlist);
     return (
       <section>
         <h1>hello there</h1>
@@ -82,26 +82,34 @@ export default function PlaylistPage({load,  handleAddToPlaylist, allPlaylist })
                   <div className="container">
                     <ul className="responsive-table">
                       <li className="table-header">
-                        <div className="col col-1">Song Id</div>
-                        <div className="col col-2">Song Name</div>
-                        <div className="col col-3">Artist</div>
+                        <div className="col col-1">Title</div>
+                        <div className="col col-2">Artist</div>
+                        <div className="col col-3">Added</div>
                         <div className="col col-4">Duration</div>
                       </li>
                       {playlist.content.map((song, idx) => {
-                        // console.log(song);
+                        // console.log();
                         return (
                           <>
                             <ContextMenuTrigger id={idx} >
-                              <li className="table-row" key={idx} onClick={() => load('https://www.youtube.com/watch?v=' + song.videoId)}>
-                                <div className="col col-1" data-label="Job Id">{song.videoId}</div>
-                                <div className="col col-2" data-label="Customer Name">{song.name}</div>
-                                <div className="col col-3" data-label="Amount">{song.artist ? (song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")):song.author}</div>
-                                <div className="col col-4" data-label="Payment Status">{<Duration seconds={song.duration/1000}/>} </div>
+                              <li className="table-row" key={idx} onClick={() => load({
+                                title: song.name,
+                                artist: song.artist ? (song.artist.name ? song.artist.name : song.artist.map(e => e.name).join(",")) : song.artist,
+                                url: 'https://www.youtube.com/watch?v=' + song.videoId
+                              })}>
+                                <div className="col col-1">{song.name}</div>
+                                <div className="col col-2">{song.artist ? (song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")):song.artist}</div>
+                                {/* <div className="col col-3">{song.thumbnails[0]}</div> */}
+                                <div className="col col-4">{<Duration seconds={song.duration/1000}/>} </div>
                               </li>
                             </ContextMenuTrigger>
 
                             <ContextMenu id={idx} >
-                              <MenuItem data={{ foo: 'bar' }} onClick={() => load('https://www.youtube.com/watch?v=' + song.videoId)}>
+                              <MenuItem data={{ foo: 'bar' }} onClick={() => load({
+                                title: song.name,
+                                artist: song.artist ? (song.artist.name ? song.artist.name : song.artist.map(e => e.name).join(",")) : song.artist,
+                                url: 'https://www.youtube.com/watch?v=' + song.videoId
+                              })}>
                                 Play
                               </MenuItem>
                               <MenuItem divider />
@@ -111,6 +119,8 @@ export default function PlaylistPage({load,  handleAddToPlaylist, allPlaylist })
                                     song_id: song.videoId,
                                     song_name: song.name,
                                     duration: song.duration,
+                                    created_at:Date.now(),
+                                    thumbnail: Array.isArray(song.thumbnails)?(song.thumbnails.length > 1 ? song.thumbnails[1].url : song.thumbnails[0].url):song.thumbnails.url ,
                                     artist: song.artist ? (song.artist.name ? song.artist.name :song.artist.map(e => e.name).join(",")):song.author
                                   })} data={{ foo: 'bar' }} >{playlist.list_Name}</MenuItem>
                                 )}

@@ -1,8 +1,14 @@
 const BASE_URL = '/api/playlists';
 
 export function getAll(authorId) {
-    return fetch(`${BASE_URL}/${authorId._id}`)
-        .then(res => res.json());
+    if(authorId === 'admin'){
+        return fetch(`${BASE_URL}/${'admin'}`)
+            .then(res => res.json());
+    }else{
+        return fetch(`${BASE_URL}/${authorId._id}`)
+            .then(res => res.json());
+    }
+    
 }
 export function getOne(playlistId) {
     return fetch(`${BASE_URL}/one/${playlistId}`)

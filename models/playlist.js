@@ -13,7 +13,11 @@ const songSchema = new Schema({
     song_id: { type: String, required: true },
     song_name: { type: String, default: '' },
     duration: { type: Number, default: 0 },
-    artist: { type: String, default: '' }
+    artist: { type: String, default: '' },
+    thumbnail: { type: String, default: '' },
+    created_at:{type:String, default:''},
+    number:{type:String, default:''}
+
 });
 
 const playlistSchema = new Schema({

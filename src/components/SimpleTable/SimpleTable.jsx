@@ -2,63 +2,69 @@
 
 // import React, { Component } from "react";
 // import Slider from "react-slick";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import './Carousel.css'
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
+import './SimpleTable.css'
+import Duration from '../PlayerBar/Duration'
 // import "~slick-carousel/slick/slick.css";
 // import "~slick-carousel/slick/slick-theme.css";
 
 
-export default function NavBar({yearsbest,load}) {
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        // desk: {
-        //     breakpoint: { max: 3000, min: 1024 },
-        //     items: 4
-        // },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
-    };
-    console.log(yearsbest);
+export default function NavBar({popular, load}) {
+    // console.log(popular)
     return (
-        <Carousel responsive={responsive} infinite={false}>
-            {
-                yearsbest.map(song=>{
-                    return (<div className='card' onClick={() => load({
-                        title: song.song_name,
-                        artist: song.artist,
-                        url: 'https://www.youtube.com/watch?v=' + song.song_id
-                    })}>
-                        <div className='image'>
-                            <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + song.song_id+'/hqdefault.jpg'} alt="" />
-                            <span className='bimage'><img src={'https://img.youtube.com/vi/' + song.song_id + '/hqdefault.jpg'} alt="" /></span>
-                            
-                        </div>
-                        <span className ='title'>{song.song_name}</span>
-                        <span className ='subtitle'>{song.artist}</span>
-                    </div>)
+        <table className='simpletable'>
+            {/* <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead> */}
+            <tbody>
+                {popular.map((song, idx)=>{
+                    return (
+                    <>
+                            <tr class="highligted" onClick={() => load({
+                                title: song.song_name,
+                                artist: song.artist,
+                                url: 'https://www.youtube.com/watch?v=' + song.song_id
+                            })}>
+                        <td>{idx+1}</td>
+                        <td>
+                            <div className='simage'>
+                                        <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://i.ytimg.com/vi/' + song.song_id+'/2.jpg'} alt="" />
+                                        {/* <span className='sbimage'><img src={'https://i.ytimg.com/vi/' + song.song_id + '/2.jpg'} alt="" /></span> */}
 
-                })
-            }
-
-            
-           
-             
-        </Carousel>
+                            </div>
+                        </td>
+                        <td>{song.song_name}</td>
+                        <td>{song.artist}</td>
+                                <td>{<Duration seconds={song.duration / 1000} />}</td>
+                        <td>:</td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                    </>
+                    )
+                })}
+                
+                {/* <tr>
+                    <td>The</td>
+                    <td>Rock</td>
+                    <td>112</td>
+                </tr>
+                <tr>
+                    <td>Brave</td>
+                    <td>Heart</td>
+                    <td>86</td>
+                </tr>
+                <tr>
+                    <td>Martin</td>
+                    <td>Jerry</td>
+                    <td>48</td>
+                </tr> */}
+            </tbody>
+        </table>
     )
 }
 

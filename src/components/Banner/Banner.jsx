@@ -2,63 +2,37 @@
 
 // import React, { Component } from "react";
 // import Slider from "react-slick";
-import Carousel from 'react-multi-carousel';
+// import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import './Carousel.css'
+import './Banner.css'
 // import "~slick-carousel/slick/slick.css";
 // import "~slick-carousel/slick/slick-theme.css";
 
 
-export default function NavBar({yearsbest,load}) {
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        // desk: {
-        //     breakpoint: { max: 3000, min: 1024 },
-        //     items: 4
-        // },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
-    };
-    console.log(yearsbest);
+export default function NavBar({name,author,image}) {
+    
+
     return (
-        <Carousel responsive={responsive} infinite={false}>
-            {
-                yearsbest.map(song=>{
-                    return (<div className='card' onClick={() => load({
-                        title: song.song_name,
-                        artist: song.artist,
-                        url: 'https://www.youtube.com/watch?v=' + song.song_id
-                    })}>
-                        <div className='image'>
-                            <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + song.song_id+'/hqdefault.jpg'} alt="" />
-                            <span className='bimage'><img src={'https://img.youtube.com/vi/' + song.song_id + '/hqdefault.jpg'} alt="" /></span>
-                            
-                        </div>
-                        <span className ='title'>{song.song_name}</span>
-                        <span className ='subtitle'>{song.artist}</span>
-                    </div>)
+        <div className='banner'>
+            <div className='banner-content'>
+            <div className='image'>
+                <img src={image} alt="" />
+                <span className='bimage'><img src={image} alt="" /></span>
 
-                })
-            }
+            </div>
+            <div className='contitle'>
+            <span className='ttitle'>playlist ...</span>
+            {/* <span className='title'>{name}</span> */}
+            <div className='tt'>
+            <span className='ptitle'>{name}</span>
+            <span className='subtitle'>created by <strong>{author}</strong> </span>
+                    </div>
+            </div>
 
-            
-           
-             
-        </Carousel>
+            </div>
+            <span className='bannerimage'><img src={image} alt="" /></span>
+
+        </div>
     )
 }
 

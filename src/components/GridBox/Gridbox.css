@@ -1,0 +1,127 @@
+/*Responsive table*/
+
+.simpletable {
+    width: 100%;
+    border-collapse: collapse;
+    /* background: #34495e; */
+    color: #f3f3f3;
+    border-spacing: 10px 10px;
+}
+
+.simpletable td, th {
+    padding: 6px;
+    text-align: left;
+}
+
+/* Zebra striping */
+
+/* .simpletable tr:nth-of-type(odd) {
+    background: #16a085;
+} */
+
+.simpletable td:first-child {
+    border-top-left-radius: 5px;
+    padding-left: 10px;
+    border-bottom-left-radius: 5px;
+}
+
+.simpletable td:last-child {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.spacer {
+    height: 8px;
+}
+
+.highligted {
+    background: #34495e;
+}
+
+.simpletable th {
+    /* background: #2c3e50; */
+    font-weight: bold;
+}
+
+img.gbimage {
+    position: absolute;
+    filter: blur(15px);
+    z-index: 99999;
+}
+
+span.gbimage {
+    filter: blur(10px) brightness(0.5) grayscale(25%);
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+}
+
+span.gbimage img {
+    /* height: 100%; */
+    width: 200px;
+    height: 200px;
+    /* width: 100%; */
+    object-fit: cover;
+}
+
+.gridimage {
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    display: flex;
+    filter: blur(.66px) brightness(0.66);
+    /* z-index: 2; */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.gridcardtitle {
+    z-index: 5;
+    position: relative;
+    bottom: 100%;
+    padding: 10px;
+    font-size: 29px;
+}
+
+.gridimage>img {
+    display: block;
+    z-index: 2;
+    /* margin-top: auto; */
+    width: inherit;
+    /* margin-bottom: auto; */
+}
+
+.gridcard {
+    /* background-color: dodgerblue; */
+    color: white;
+    height: 200px;
+    /* padding: 1rem;
+    height: 4rem; */
+}
+
+.gridcards {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+}
+
+/* Screen larger than 600px? 2 column */
+
+@media (min-width: 600px) {
+    .gridcards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Screen larger than 900px? 3 columns */
+
+@media (min-width: 900px) {
+    .gridcards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
