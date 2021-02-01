@@ -7,102 +7,51 @@
 import './Gridbox.css'
 // import "~slick-carousel/slick/slick.css";
 // import "~slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
-
-export default function NavBar() {
-    
+export default function Gridbox({ genres }) {
+    // console.log(genres);
+    const genrename={
+        "country-songs":"Country",
+        "dance-electronic-songs":"Dance/Electronic",
+        "latin-songs":"Latin",
+        "pop-songs":"Pop",
+        "r-b-hip-hop-songs":"R&B/Hip-Hop",
+        "rock-songs":"Rock"
+    }
     return (
 
-<div class="gridcards">
-  <div class="gridcard">
+        <div class="gridcards">
+            {genres.map(genre=>{
+                const playlist = genre[Object.keys(genre)[0]];
+                const loaded = playlist.songs.length>1?3:0;
+                // console.log(genre[Object.keys(genre)[0]].list_Name);
+            return (
+                <Link
+                    to={{
+                        pathname: '/playlist',
+                        state: { playlist }
+                    }}
+                    key={playlist._id}
+                >
+            <div class="gridcard">
                 <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
+                    {playlist.songs.length ? <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[loaded].song_id + '/hqdefault.jpg'} alt="" />
+                            :
+                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />}
                     <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
 
                 </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
+                <div className='gridcardtitle'>{genrename[playlist.list_Name]}</div>
+            </div>
+            </Link>
+            )
+            }
+            )
 
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  <div class="gridcard">
-                <div className='gridimage'>
-                    <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />
-                    <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
-
-                </div>
-                <div className='gridcardtitle'>Country</div>
-  </div>
-  {/* <div class="gridcard">TWO</div>
+            }
+            
+            {/* <div class="gridcard">TWO</div>
   <div class="gridcard">THREE</div>
   <div class="gridcard">FOUR</div>
   <div class="gridcard">FIVE</div>
@@ -113,9 +62,9 @@ export default function NavBar() {
   <div class="gridcard">TEN</div>
   <div class="gridcard">ELEVEN</div>
   <div class="gridcard">TWELVE</div> */}
-</div>
+        </div>
         // <table className='simpletable'>
-            
+
         //     <tbody>
         //         <tr class="highligted">
         //             <td>1</td>
@@ -148,8 +97,8 @@ export default function NavBar() {
         //         </tr>
         //     </tbody>
         // </table>
-    
-    
+
+
     )
 }
 

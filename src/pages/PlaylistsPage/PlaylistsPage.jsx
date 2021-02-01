@@ -25,7 +25,17 @@ export default function PlaylistsPage({ allPlaylist, handleDeletePlaylist}) {
             <li className="cards_item" key={playlist._id}>
               <div className="card">
                 <div className="card_image">
-                  <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA"  alt='' />
+                  
+                  <div className='image'>
+                    {playlist.songs.length ? <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
+                    
+                    :
+                      <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA" alt="" />
+                    }
+                    <span className='bimage'><img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA" alt="" /></span>
+
+                  </div>
+                  {/* <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA"  alt='' /> */}
                   </div>
                   <div className="card_content">
                   <Link
@@ -36,7 +46,7 @@ export default function PlaylistsPage({ allPlaylist, handleDeletePlaylist}) {
                     key={playlist._id}
                   ><h2 className="card_title">{playlist.list_Name}</h2></Link>
                   {/* <h2 className="card_title">{playlist.list_Name}</h2> */}
-                    <p className="card_text">{playlist.songs.length} songs</p>
+                    <p className="card_text">{playlist.songs.length} songs </p>
                   <button onClick={() => handleDeletePlaylist(playlist._id)}>Delete Playlist</button>
                   </div>
                 </div>

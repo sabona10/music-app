@@ -9,15 +9,23 @@ import './Banner.css'
 // import "~slick-carousel/slick/slick-theme.css";
 
 
-export default function NavBar({name,author,image}) {
+export default function NavBar({name,author,playlist,image}) {
     
 
     return (
         <div className='banner'>
             <div className='banner-content'>
             <div className='image'>
-                <img src={image} alt="" />
-                <span className='bimage'><img src={image} alt="" /></span>
+                    {playlist.songs.length ? <><img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
+                        <span className='bimage'><img src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/mqdefault.jpg'} alt="" /></span>
+</>
+                        :
+                        <>
+                        <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA" alt="" />
+                            <span className='bimage'><img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA" alt="" /></span>
+                        </>
+                    }
+                
 
             </div>
             <div className='contitle'>
@@ -30,7 +38,10 @@ export default function NavBar({name,author,image}) {
             </div>
 
             </div>
+            {playlist.songs.length ? <span className='bannerimage'><img src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/mqdefault.jpg'} alt="" /></span>
+            :
             <span className='bannerimage'><img src={image} alt="" /></span>
+}
 
         </div>
     )

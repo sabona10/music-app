@@ -16,7 +16,8 @@ const songSchema = new Schema({
     artist: { type: String, default: '' },
     thumbnail: { type: String, default: '' },
     created_at:{type:String, default:''},
-    number:{type:String, default:''}
+    number:{type:String, default:''},
+    type:{type:String, default:''}
 
 });
 

@@ -146,7 +146,7 @@ html {
   height: 100px;
 }
 
-.react-contextmenu-item.react-contextmenu-submenu>.react-contextmenu-item {}
+/* .react-contextmenu-item.react-contextmenu-submenu>.react-contextmenu-item {} */
 
 .react-contextmenu-item.react-contextmenu-submenu>.react-contextmenu-item:after {
   content: "\25B6";

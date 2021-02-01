@@ -82,9 +82,14 @@ span.gbimage img {
 .gridcardtitle {
     z-index: 5;
     position: relative;
-    bottom: 100%;
     padding: 10px;
     font-size: 29px;
+    bottom: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: inline-block;
 }
 
 .gridimage>img {
@@ -104,24 +109,11 @@ span.gbimage img {
 }
 
 .gridcards {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
     grid-gap: 1rem;
-}
-
-/* Screen larger than 600px? 2 column */
-
-@media (min-width: 600px) {
-    .gridcards {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Screen larger than 900px? 3 columns */
-
-@media (min-width: 900px) {
-    .gridcards {
-        grid-template-columns: repeat(3, 1fr);
-    }
 }

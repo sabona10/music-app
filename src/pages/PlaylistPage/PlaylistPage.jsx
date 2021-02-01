@@ -111,7 +111,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
               playlist.songs.length ?
               <>
               {}
-                  <Banner name={playlist.list_Name} author={playlist.author_name} image={playlistCover ? playlistCover : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA'} />
+                  <Banner name={playlist.list_Name} author={playlist.author_name} playlist ={playlist} image={playlistCover ? playlistCover : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA'} />
 
                 <ul className="cards">
                   <div className="container">

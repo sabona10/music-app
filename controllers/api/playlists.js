@@ -35,6 +35,18 @@ async function index(req, res) {
     res.status(200).json(playlists);
 }
 
+// async function browsePageResults(req, res) {
+//     // const playlist = await Playlist.create(req.body);
+//     const playlists = await Playlist.find({ author_id: 'admin' });
+
+//     // for (let playlist = 0; playlist < playlists.length; playlist++) {
+//     //     const element = playlists[playlist];
+        
+//     // }
+//     res.status(200).json(playlists);
+
+//     res.status(201).json(playlist);
+// }
 async function create(req, res) {
     const playlist = await Playlist.create(req.body);
     res.status(201).json(playlist);
@@ -44,6 +56,7 @@ async function show(req, res) {
     const playlist = await Playlist.findById(req.params.id);
     res.status(200).json(playlist);
 }
+
 
 async function update(req, res) {
     const updatedPlaylist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {

@@ -20,7 +20,20 @@ export default function App() {
   const [user, setUser] = useState(getUser());
   const [allPlaylists, setAllPlaylists] = useState([]);
   const [thisPlaylist, setThisPlaylist] = useState([]);
-  const [browsePlaylists, setBrowsePlaylists] = useState([]);
+  const [browsePlaylists, setBrowsePlaylists] = useState([{
+    list_Name: 'admin',
+    songs: [{
+      song_id: '',
+      song_name: '',
+      duration: 0,
+      artist: '',
+      number:'1',
+      thumbnail: ''
+    }],
+    author_name: 'admin',
+    author_id: 'admin',
+    // user:[userSchema]
+  }]);
   const [playing, setPlaying] = useState(true);
   const [nowPlaying, setNowPlaying] = useState({
     title:'',
@@ -45,6 +58,7 @@ export default function App() {
     async function getAllPlaylists() {
       console.log(user);
       const playlists = await playlistApi.getAll(getUser());
+      if (allPlaylists != undefined) setAllPlaylists(playlists);
       setAllPlaylists(playlists);
       console.log(playlists);
       
@@ -52,7 +66,7 @@ export default function App() {
     async function getBrowsePlaylists() {
       // console.log(user);
       const playlists = await playlistApi.getAll('admin');
-      setBrowsePlaylists(playlists);
+      if(browsePlaylists != undefined) setBrowsePlaylists(playlists);
       // console.log(playlists);
       
     }
@@ -61,7 +75,7 @@ export default function App() {
       getBrowsePlaylists();
       getAllPlaylists();
     }
-  }, [history,user])
+  }, [user,history])
   // useEffect(()=>{
   //   async function getChartPlaylists() {
   //     // console.log(user);
@@ -168,7 +182,7 @@ async function handleGetSearchSuggestions(term) {
               <ChartsPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
             </Route>
             <Route path="/discover">
-              <DiscoverPage browsePlaylists={browsePlaylists} load={load}/>
+              <DiscoverPage browsePlaylists={browsePlaylists} load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
             </Route>
             {/* <Route path="/genres">
               <GenresPage />

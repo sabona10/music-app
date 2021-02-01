@@ -4,41 +4,24 @@
 // import Slider from "react-slick";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from "react-contextmenu";
+
 import './Carousel.css'
 // import "~slick-carousel/slick/slick.css";
 // import "~slick-carousel/slick/slick-theme.css";
 
 
-export default function NavBar({yearsbest,load}) {
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 5
-        },
-        // desk: {
-        //     breakpoint: { max: 3000, min: 1024 },
-        //     items: 4
-        // },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
-    };
-    console.log(yearsbest);
+export default function NavBar({ yearsbest, load, handleAddToPlaylist, allPlaylist}) {
+    
+    // console.log(yearsbest);
     return (
-        <Carousel responsive={responsive} infinite={false}>
+        <div className="carousel">
             {
-                yearsbest.map(song=>{
-                    return (<div className='card' onClick={() => load({
+                yearsbest.map((song,idx)=>{
+                    return (
+                    <>
+                            <ContextMenuTrigger id={idx} >
+                    <div className='card' onClick={() => load({
                         title: song.song_name,
                         artist: song.artist,
                         url: 'https://www.youtube.com/watch?v=' + song.song_id
@@ -50,7 +33,36 @@ export default function NavBar({yearsbest,load}) {
                         </div>
                         <span className ='title'>{song.song_name}</span>
                         <span className ='subtitle'>{song.artist}</span>
-                    </div>)
+                    </div>
+                            </ContextMenuTrigger>
+                            <ContextMenu id={idx} >
+                                <MenuItem onClick={() => load({
+                                    title: song.song_name,
+                                    artist: song.artist,
+                                    url: 'https://www.youtube.com/watch?v=' + song.song_id
+                                })}>
+                                    Play
+                              </MenuItem>
+                                <MenuItem divider />
+                                <SubMenu title='Add to Playlist'>
+                                    {allPlaylist.map(playlist =>
+                                        <MenuItem key={playlist._id} onClick={() => handleAddToPlaylist(playlist._id, {
+                                            song_id: song.song_id,
+                                            song_name: song.song_name,
+                                            duration: song.duration,
+                                            created_at: Date.now(),
+                                            thumbnail: song.thumbnail ? song.thumbail : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA',
+                                            artist: song.artist
+                                        })} >{playlist.list_Name}</MenuItem>
+                                        // <MenuItem onClick={handleClick} data={{ foo: 'subitem 2' }}>playlist 2</MenuItem>
+                                    )}
+                                </SubMenu>
+                                {/* <MenuItem data={{ foo: 'bar' }} onClick={handleClick}>
+                                ContextMenu Item 3
+                              </MenuItem> */}
+                            </ContextMenu>
+                    </>
+                    )
 
                 })
             }
@@ -58,7 +70,7 @@ export default function NavBar({yearsbest,load}) {
             
            
              
-        </Carousel>
+        </div>
     )
 }
 

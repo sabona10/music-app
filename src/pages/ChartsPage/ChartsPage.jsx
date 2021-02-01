@@ -116,6 +116,7 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                                   created_at:Date.now(),
                                   thumbnail:song.thumbnail,
                                   duration: song.duration,
+                                  type:'song',
                                   artist: song.artist 
                                 })} data={{ foo: 'bar' }} >{playlist.list_Name}</MenuItem>
                               )}

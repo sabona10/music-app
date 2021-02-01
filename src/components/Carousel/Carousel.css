@@ -42,6 +42,7 @@ span.bimage img {
 .card {
     text-align: left;
     color: white;
+    padding-right: 16px;
 }
 
 /* .card.title {
@@ -50,8 +51,46 @@ span.bimage img {
 
 span.title {
     font-size: 19px;
+    width: 260px!important;
 }
 
 span.subtitle {
     color: #8592c7;
 }
+
+.carousel {
+    display: -webkit-inline-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    overflow-x: scroll;
+    width: 100%;
+}
+
+span.subtitle, span.title {
+    /* color: #8592c7; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: inline-block;
+}
+
+/* .carousel {
+    position: relative;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    transition: all 0.2s;
+    transform: scale(0.98);
+    will-change: transform;
+    user-select: none;
+    cursor: pointer;
+} */
+
+/* .carousel.active {
+    background: rgba(255, 255, 255, 0.3);
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    transform: scale(1);
+} */
