@@ -30,7 +30,8 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
       // console.log(user);
       const chartplaylists = await playlistApi.getOne('6015f53f4146db4c0859c538');
       setChartPlaylist(chartplaylists);
-      // console.log(chartplaylists);
+      // console.log('heeloikjo');
+      console.log(chartplaylists);
       // console.log('done this');
 
     }

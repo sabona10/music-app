@@ -29,9 +29,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 // to a req.user property
 app.use(require('./config/checkToken'));
 
+//ensure logged in
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+
+
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
-app.use("/api/playlists", playlistsRouter);
+app.use("/api/playlists", ensureLoggedIn, playlistsRouter);
+
+
 app.use("/api/browse", browseRouter);
 
 // The following "catch all" route (note the *) is necessary

@@ -26,7 +26,7 @@ const playlistSchema = new Schema({
     songs: [songSchema],
     author_name: { type: String, required: true },
     author_id:{ type: String, required: true },
-    // user:[userSchema]
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
     timestamps: true
 });

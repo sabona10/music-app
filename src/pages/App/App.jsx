@@ -179,7 +179,7 @@ async function handleGetSearchSuggestions(term) {
           {/* <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' playing={playing} onDuration={handleDuration}/> */}
           <Switch>
             <Route path="/charts">
-              <ChartsPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} />
+              <ChartsPage load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists} browsePlaylists={browsePlaylists} />
             </Route>
             <Route path="/discover">
               <DiscoverPage browsePlaylists={browsePlaylists} load={load} handleAddToPlaylist={handleAddToPlaylist} allPlaylist={allPlaylists}/>
