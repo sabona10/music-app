@@ -6,7 +6,7 @@ This is a Music App, a place to listen to your music, catalog your favorites in 
 | | |
 |:-------------------------:|:-------------------------:|   
 |<img src="pics/mainpage.PNG">  |  <img src="pics/playlists.PNG">|
-<img src="pics/addto.PNG">| <img src="pics/playlist.PNG">|
+<img src="pics/addto.PNG">| <img src="pics/Playlist.PNG">|
 
 
 
