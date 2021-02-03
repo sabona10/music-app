@@ -1,4 +1,4 @@
-# Shopping-Site
+# Music App
 This is a Music App, a place to listen to your music, catalog your favorites in playlists and discover new music popular around you. 
 
 ## Screenshot
