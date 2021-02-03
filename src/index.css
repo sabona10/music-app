@@ -129,12 +129,16 @@ input:focus {
   border-color: var(--orange);
 }
 
+a {
+  text-decoration: none;
+}
+
 button, a.button {
-  margin: 1vmin;
+  /* margin: 1vmin; */
   padding: 1vmin;
   color: var(--white);
-  background-color: var(--orange);
-  font-size: 2vmin;
+  background-color: #f67f0000;
+  /* font-size: 2vmin; */
   font-weight: bold;
   text-decoration: none;
   text-align: center;
