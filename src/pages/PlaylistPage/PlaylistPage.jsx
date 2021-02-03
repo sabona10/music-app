@@ -79,6 +79,12 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
       }
     }
   };
+  function randomString(length) {
+    let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  }
 
   const timeAgo = (date) => {
     const timeAgoInSeconds = Math.floor((new Date() - new Date(date)) / 1000);
@@ -123,10 +129,11 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                         <div className="col col-4">Duration</div>
                       </li>
                           {playlist.songs != null ? playlist.songs.map((song, idx) => {
+                            const randid = randomString(10);
                             if (!playlistCover && song.thumbnail != null&&song.thumbnail.length) setPlaylistCover(song.thumbnail)
                         return (
                           <>
-                            <ContextMenuTrigger id={song.song_id} >
+                            <ContextMenuTrigger id={randid} >
                               {/* ref={c => contextTrigger = c} */}
                               <li className="table-row" key={song.song_id} onClick={() => load({
                                 title: song.song_name,
@@ -145,7 +152,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                               {/* <div className="well">Right click to see the menu</div> */}
                             </ContextMenuTrigger>
 
-                            <ContextMenu id={song.song_id} >
+                            <ContextMenu id={randid} >
                               <MenuItem onClick={() => load({
                                 title: song.song_name,
                                 artist: song.artist,

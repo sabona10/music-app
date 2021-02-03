@@ -63,6 +63,12 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
   // }
   // console.log(chartPlaylist);
   const playlist = chartPlaylist;
+  function randomString(length) {
+    let chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  }
   // console.log(playlist);
   return (
     <section>
@@ -85,9 +91,10 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                       <div className="col col-4">Duration</div>
                     </li>
                     {playlist.songs.map((song, idx) => {
+                      const randid = randomString(10);
                       return (
                         <>
-                          <ContextMenuTrigger id={song.song_id} >
+                          <ContextMenuTrigger id={randid} >
                             <li className="table-row" key={idx} onClick={() => load({
                               title: song.song_name,
                               artist: song.artist,
@@ -100,7 +107,7 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                             </li>
                           </ContextMenuTrigger>
 
-                          <ContextMenu id={song.song_id} >
+                          <ContextMenu id={randid} >
                             <MenuItem data={{ foo: 'bar' }} onClick={() => load({
                               title: song.song_name,
                               artist: song.artist,
