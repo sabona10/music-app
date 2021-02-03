@@ -1,6 +1,6 @@
 // import React from 'react';
 import { ContextMenu, MenuItem, ContextMenuTrigger, SubMenu } from "react-contextmenu";
-import { useLocation, Redirect } from 'react-router-dom';
+// import { useLocation, Redirect } from 'react-router-dom';
 import {useEffect,useState} from 'react';
 import Duration from '../../components/PlayerBar/Duration'
 import * as playlistApi from '../../utilities/playlists-api';
@@ -87,7 +87,7 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                     {playlist.songs.map((song, idx) => {
                       return (
                         <>
-                          <ContextMenuTrigger id={idx} >
+                          <ContextMenuTrigger id={song.song_id} >
                             <li className="table-row" key={idx} onClick={() => load({
                               title: song.song_name,
                               artist: song.artist,
@@ -100,7 +100,7 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                             </li>
                           </ContextMenuTrigger>
 
-                          <ContextMenu id={idx} >
+                          <ContextMenu id={song.song_id} >
                             <MenuItem data={{ foo: 'bar' }} onClick={() => load({
                               title: song.song_name,
                               artist: song.artist,

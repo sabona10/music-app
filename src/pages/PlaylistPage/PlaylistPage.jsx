@@ -108,32 +108,32 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
             {/* <h1>One Playlist called dd{playlist.list_Name}</h1> */}
             
             {
-              playlist.songs.length ?
+              !!playlist && playlist.songs != null ?
               <>
               {}
                   <Banner name={playlist.list_Name} author={playlist.author_name} playlist ={playlist} image={playlistCover ? playlistCover : 'https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA'} />
-
+              <div className="blacklist"> 
                 <ul className="cards">
                   <div className="container">
                     <ul className="responsive-table">
-                      <li className="table-header">
+                      <li className="table-header thh">
                         <div className="col col-1">Title</div>
                         <div className="col col-2">Artist</div>
                         <div className="col col-3">Added</div>
                         <div className="col col-4">Duration</div>
                       </li>
-                      {playlist.songs.map((song, idx) => {
-                          if(!playlistCover && song.thumbnail.length) setPlaylistCover(song.thumbnail)
+                          {playlist.songs != null ? playlist.songs.map((song, idx) => {
+                            if (!playlistCover && song.thumbnail != null&&song.thumbnail.length) setPlaylistCover(song.thumbnail)
                         return (
                           <>
-                            <ContextMenuTrigger id={idx} >
+                            <ContextMenuTrigger id={song.song_id} >
                               {/* ref={c => contextTrigger = c} */}
-                              <li className="table-row" key={idx} onClick={() => load({
+                              <li className="table-row" key={song.song_id} onClick={() => load({
                                 title: song.song_name,
                                 artist: song.artist,
                                 url: 'https://www.youtube.com/watch?v=' + song.song_id
                               })}>
-                                {/* <li className="table-row" key={idx} onClick={hideMenu}> */}
+                                {/* <li className="table-row" key={song.song_id} onClick={hideMenu}> */}
                                 <div className="col col-1">{song.song_name}</div>
                                 <div className="col col-2">{song.artist}</div>
                                 {/* <div className="col col-3">{song.created_at}</div> */}
@@ -145,7 +145,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                               {/* <div className="well">Right click to see the menu</div> */}
                             </ContextMenuTrigger>
 
-                            <ContextMenu id={idx} >
+                            <ContextMenu id={song.song_id} >
                               <MenuItem onClick={() => load({
                                 title: song.song_name,
                                 artist: song.artist,
@@ -153,9 +153,10 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                               })}>
                                 Play
                               </MenuItem>
+                              {playlist.author_id !=="admin"&&
                               <MenuItem onClick={() => handleRemoveFromPlaylist(playlist._id, idx)}>
                                 remove from playlist
-                              </MenuItem>
+                              </MenuItem>}
                               <MenuItem divider />
                               <SubMenu title='Add to Playlist'>
                                 {allPlaylist.map(playlist =>
@@ -178,8 +179,12 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
                           </>
                         )
 
-                      })}
-                    </ul>
+                      }) 
+                            :
+                            <h3> This playlist is Emptsy</h3>}
+                    
+                    
+                      </ul>
                     {/* <button onClick={() => handleAddToPlaylist(playlist._id, {
                       song_id: 'QTw5B7YhaIQ',
                       song_name: 'Be Prepared',
@@ -201,9 +206,12 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
               </li>
             )} */}
                 </ul>
+               
+             </div>
+             
               </>
                 :
-                <h3> This playlist is Empty</h3>}
+                <h3> This playlist is Emptsy</h3>}
           </div>
 
         </div>

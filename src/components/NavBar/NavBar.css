@@ -53,8 +53,9 @@
     position: fixed;
     text-align: left;
     overflow: auto;
-    background: #312450;
+    /* background: #312450; */
     height: 100vh;
+    background: #0f141d;
     font-size: 0.65em;
     /* font-weight: bold;
     position: relative;
@@ -87,6 +88,11 @@ span.flaticon-paragraph-left-alignment-symbol-for-interface::before {
     color: rgba(255, 255, 255, 0.65);
     display: block;
     transition: all ease-out 300ms;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 250px;
+    display: inline-block;
 }
 
 .nav ul li a.active a {

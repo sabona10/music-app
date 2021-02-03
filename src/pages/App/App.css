@@ -6,6 +6,7 @@
 .playllist {
   margin-top: 0;
 }
+
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -14,6 +15,14 @@
 ::-webkit-scrollbar-thumb {
   background: #3a4454;
   border-radius: 15px;
+}
+
+main.auth-page {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #0f141d;
+  width: 100%;
 }
 
 span.player-detail {
@@ -71,7 +80,7 @@ span.player-detail {
 html {
   font-family: Arial;
   font-size: 16px;
-  background: #0e1848;
+  background: black;
 }
 
 .react-contextmenu {
@@ -136,6 +145,34 @@ html {
 
 .react-contextmenu-item.react-contextmenu-submenu {
   padding: 0;
+}
+
+.responsive-table .table-row {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.col-1 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 200px;
+  display: inline-block;
+}
+
+.container {
+  /* max-width: 1000px; */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 15px 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
 }
 
 .player-wrapper {

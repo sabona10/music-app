@@ -16,7 +16,7 @@ export default function NavBar({name,author,playlist,image}) {
         <div className='banner'>
             <div className='banner-content'>
             <div className='image'>
-                    {playlist.songs.length ? <><img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
+                    {playlist.songs.length ? <><img style={{ 'objectFit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
                         <span className='bimage'><img src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/mqdefault.jpg'} alt="" /></span>
 </>
                         :

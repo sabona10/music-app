@@ -1,4 +1,4 @@
-import * as usersService from '../../utilities/users-service';
+// import * as usersService from '../../utilities/users-service';
 // import Carousel, { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 // import '@brainhubeu/react-carousel/lib/style.css';
 
@@ -6,7 +6,7 @@ import Carousel from '../../components/Carousel/Carousel';
 import SimpleTable from '../../components/SimpleTable/SimpleTable';
 import GridBox from '../../components/GridBox/GridBox';
 import './DiscoverPage.css';
-import {useState} from 'react';
+// import {useState} from 'react';
 
 
 export default function DiscoverPage({ browsePlaylists, load, handleAddToPlaylist, allPlaylist }) {
@@ -82,10 +82,10 @@ export default function DiscoverPage({ browsePlaylists, load, handleAddToPlaylis
         popsongs},{danceelectronicsongs}]
       
   // console.log(popular);
-  async function handleCheckToken() {
-    const expDate = await usersService.checkToken();
-    console.log(expDate);
-  }
+  // async function handleCheckToken() {
+  //   const expDate = await usersService.checkToken();
+  //   console.log(expDate);
+  // }
 
   return (
     <section className='discover-page'>

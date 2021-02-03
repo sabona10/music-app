@@ -20,14 +20,14 @@ export default function NavBar({ yearsbest, load, handleAddToPlaylist, allPlayli
                 yearsbest.map((song,idx)=>{
                     return (
                     <>
-                            <ContextMenuTrigger id={idx} >
+                            <ContextMenuTrigger id={song.song_id} >
                     <div className='card' onClick={() => load({
                         title: song.song_name,
                         artist: song.artist,
                         url: 'https://www.youtube.com/watch?v=' + song.song_id
                     })}>
                         <div className='image'>
-                            <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + song.song_id+'/hqdefault.jpg'} alt="" />
+                                        <img style={{ 'objectFit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + song.song_id+'/hqdefault.jpg'} alt="" />
                             <span className='bimage'><img src={'https://img.youtube.com/vi/' + song.song_id + '/hqdefault.jpg'} alt="" /></span>
                             
                         </div>
@@ -35,7 +35,7 @@ export default function NavBar({ yearsbest, load, handleAddToPlaylist, allPlayli
                         <span className ='subtitle'>{song.artist}</span>
                     </div>
                             </ContextMenuTrigger>
-                            <ContextMenu id={idx} >
+                            <ContextMenu id={song.song_id} >
                                 <MenuItem onClick={() => load({
                                     title: song.song_name,
                                     artist: song.artist,

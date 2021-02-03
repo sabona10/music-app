@@ -40,7 +40,7 @@
     }
 
     .card {
-        border-radius: 0.25rem;
+        border-radius: 0.24rem;
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -71,15 +71,6 @@
         font-family: "lato", sans-serif;
     }
 
-    .container {
-        max-width: 1000px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
     h2 {
         font-size: 26px;
         margin: 20px 0;
@@ -90,14 +81,6 @@
         font-size: 0.5em;
     }
 
-    .responsive-table li {
-        border-radius: 3px;
-        padding: 25px 30px;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 25px;
-    }
-
     .responsive-table .table-header {
         background-color: #95A5A6;
         font-size: 14px;
@@ -105,13 +88,43 @@
         letter-spacing: 0.03em;
     }
 
-    .responsive-table .table-row {
-        background-color: #ffffff;
+    .blacklist .table-row {
+        background-color: transparent;
         box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
     }
 
     .responsive-table .col-1 {
         flex-basis: 40%;
+    }
+
+    .blacklist {
+        z-index: 99;
+        position: relative;
+        color: white;
+    }
+
+    ul.responsive-table li {
+        padding-left: 3%;
+    }
+
+    .thh {
+        margin-top: -45px;
+        z-index: 99;
+        position: relative;
+        width: 100%;
+        font-weight: bold;
+        background-image: linear-gradient(to top, #000000de, #00000073, #00000030, #004d7a00);
+        background-color: #ff000000!important;
+        color: white;
+    }
+
+    .blacklist.table-row:hover {
+        background-color: #81818185;
+        transition: .2s;
+    }
+
+    ul.responsive-table {
+        padding-left: 0;
     }
 
     .responsive-table .col-2 {

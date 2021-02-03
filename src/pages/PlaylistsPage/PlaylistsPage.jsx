@@ -27,7 +27,7 @@ export default function PlaylistsPage({ allPlaylist, handleDeletePlaylist}) {
                 <div className="card_image">
                   
                   <div className='image'>
-                    {playlist.songs.length ? <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
+                    {playlist.songs.length ? <img style={{ 'objectFit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[0].song_id + '/hqdefault.jpg'} alt="" />
                     
                     :
                       <img src="https://play-lh.googleusercontent.com/j-MLXrudwclqIlOZxRe90kOGS744GY0spVZF2OsEnJeMMxqa6Qxu1SwLiCmjQp8gIA" alt="" />

@@ -21,7 +21,7 @@ export default function Gridbox({ genres }) {
     }
     return (
 
-        <div class="gridcards">
+        <div className="gridcards">
             {genres.map(genre=>{
                 const playlist = genre[Object.keys(genre)[0]];
                 const loaded = playlist.songs.length>1?3:0;
@@ -34,9 +34,9 @@ export default function Gridbox({ genres }) {
                     }}
                     key={playlist._id}
                 >
-            <div class="gridcard">
+            <div className="gridcard">
                 <div className='gridimage'>
-                    {playlist.songs.length ? <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[loaded].song_id + '/hqdefault.jpg'} alt="" />
+                            {playlist.songs.length ? <img style={{ 'objectFit': 'cover', height: '135%' }} src={'https://img.youtube.com/vi/' + playlist.songs[loaded].song_id + '/hqdefault.jpg'} alt="" />
                             :
                     <img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" />}
                     <span className='gbimage'><img src="https://i.ytimg.com/vi/-ot6NLsbxjg/sddefault.jpg?sqp=-oaymwEWCJADEOEBIAQqCghqEJQEGHgg6AJIWg&rs=AMzJL3lpulY1JNUEorxChGiioEyNRWJanA" alt="" /></span>
@@ -51,22 +51,22 @@ export default function Gridbox({ genres }) {
 
             }
             
-            {/* <div class="gridcard">TWO</div>
-  <div class="gridcard">THREE</div>
-  <div class="gridcard">FOUR</div>
-  <div class="gridcard">FIVE</div>
-  <div class="gridcard">SIX</div>
-  <div class="gridcard">SEVEN</div>
-  <div class="gridcard">EIGHT</div>
-  <div class="gridcard">NINE</div>
-  <div class="gridcard">TEN</div>
-  <div class="gridcard">ELEVEN</div>
-  <div class="gridcard">TWELVE</div> */}
+            {/* <div className="gridcard">TWO</div>
+  <div className="gridcard">THREE</div>
+  <div className="gridcard">FOUR</div>
+  <div className="gridcard">FIVE</div>
+  <div className="gridcard">SIX</div>
+  <div className="gridcard">SEVEN</div>
+  <div className="gridcard">EIGHT</div>
+  <div className="gridcard">NINE</div>
+  <div className="gridcard">TEN</div>
+  <div className="gridcard">ELEVEN</div>
+  <div className="gridcard">TWELVE</div> */}
         </div>
         // <table className='simpletable'>
 
         //     <tbody>
-        //         <tr class="highligted">
+        //         <tr className="highligted">
         //             <td>1</td>
         //             <td>
         //                 <div className='simage'>
@@ -80,8 +80,8 @@ export default function Gridbox({ genres }) {
         //             <td>3:58</td>
         //             <td>:</td>
         //         </tr>
-        //         <tr class="spacer"></tr>
-        //         <tr class="highligted">
+        //         <tr className="spacer"></tr>
+        //         <tr className="highligted">
         //             <td>1</td>
         //             <td>
         //                 <div className='simage'>

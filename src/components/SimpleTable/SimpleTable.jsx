@@ -25,7 +25,7 @@ export default function NavBar({popular, load}) {
                 {popular.map((song, idx)=>{
                     return (
                     <>
-                            <tr class="highligted" onClick={() => load({
+                            <tr className="highligted" onClick={() => load({
                                 title: song.song_name,
                                 artist: song.artist,
                                 url: 'https://www.youtube.com/watch?v=' + song.song_id
@@ -33,7 +33,7 @@ export default function NavBar({popular, load}) {
                         <td>{idx+1}</td>
                         <td>
                             <div className='simage'>
-                                        <img style={{ 'object-fit': 'cover', height: '135%' }} src={'https://i.ytimg.com/vi/' + song.song_id+'/2.jpg'} alt="" />
+                                        <img style={{ 'objectFit': 'cover', height: '135%' }} src={'https://i.ytimg.com/vi/' + song.song_id+'/2.jpg'} alt="" />
                                         {/* <span className='sbimage'><img src={'https://i.ytimg.com/vi/' + song.song_id + '/2.jpg'} alt="" /></span> */}
 
                             </div>
@@ -43,7 +43,7 @@ export default function NavBar({popular, load}) {
                                 <td>{<Duration seconds={song.duration / 1000} />}</td>
                         <td>:</td>
                     </tr>
-                    <tr class="spacer"></tr>
+                    <tr className="spacer"></tr>
                     </>
                     )
                 })}

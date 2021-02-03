@@ -103,16 +103,16 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
           {/* <li><NavLink exact activeStyle={{ color: 'white' }} to="/genres"> <span className='flaticon-dj'></span> Genres</NavLink></li> */}
           <li className="ptitle"><NavLink exact activeStyle={{ color: 'white' }} to="/playlists"> <span className='flaticon-playlist-1'></span> Playlists</NavLink></li>
           <ul className="playlist">
-            {allPlaylist.map(playlist =>
-              <li key={playlist._id} className="playlists">
+            {allPlaylist.map((playlist,idx) =>{
+              return (<li key={idx+'e'} className="playlists">
                 <Link
                   to={{
                     pathname: '/playlist',
                     state: { playlist }
                   }}
-                  key= {playlist._id}
+                  // key= {playlist._id}
                 > <span className='flaticon-paragraph-left-alignment-symbol-for-interface'></span> <span>{playlist.list_Name}</span></Link>
-              </li>
+              </li>)}
             )}
             <li><div className="inputField">
               <input
@@ -144,8 +144,8 @@ export default function NavBar({ user, setUser, allPlaylist, handleCreatePlaylis
         </div>
         
           <div className="suggestions">
-            {suggestions.map(suggestion=>
-              <div onClick={() => handleGetSearchResults(suggestion)}>{suggestion}</div>
+            {suggestions.map((suggestion,idx)=>
+              <div key = {idx+'ee'} onClick={() => handleGetSearchResults(suggestion)}>{suggestion}</div>
               )}
           </div>
       </div>

@@ -1,7 +1,7 @@
-import React, { Component, useState, useRef, useEffect } from 'react'
-import { findDOMNode } from 'react-dom'
-import { hot } from 'react-hot-loader'
-import screenfull from 'screenfull';
+import React, { useState, useRef, useEffect } from 'react'
+// import { findDOMNode } from 'react-dom'
+// import { hot } from 'react-hot-loader'
+// import screenfull from 'screenfull';
 import './PlayerBar.css'
 import './PlayerBarIconsCss/flaticon.css'
 import ReactPlayer from 'react-player/youtube'

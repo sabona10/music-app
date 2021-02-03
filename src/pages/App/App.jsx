@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { getUser } from '../../utilities/users-service';
-import ReactPlayer, {playing} from 'react-player/youtube'
+// import ReactPlayer, {playing} from 'react-player/youtube'
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
 import * as playlistApi from '../../utilities/playlists-api';
 import * as browseApi from '../../utilities/browse-api';
 import ChartsPage from '../ChartsPage/ChartsPage';
-import GenresPage from '../GenresPage/GenresPage';
+// import GenresPage from '../GenresPage/GenresPage';
 import DiscoverPage from '../DiscoverPage/DiscoverPage';
 import PlaylistsPage from '../PlaylistsPage/PlaylistsPage';
 import PlaylistPage from '../PlaylistPage/PlaylistPage';
@@ -58,7 +58,7 @@ export default function App() {
     async function getAllPlaylists() {
       console.log(user);
       const playlists = await playlistApi.getAll(getUser());
-      if (allPlaylists != undefined) setAllPlaylists(playlists);
+      if (allPlaylists !== undefined) setAllPlaylists(playlists);
       setAllPlaylists(playlists);
       console.log(playlists);
       
@@ -66,7 +66,7 @@ export default function App() {
     async function getBrowsePlaylists() {
       // console.log(user);
       const playlists = await playlistApi.getAll('admin');
-      if(browsePlaylists != undefined) setBrowsePlaylists(playlists);
+      if(browsePlaylists !== undefined) setBrowsePlaylists(playlists);
       // console.log(playlists);
       
     }
@@ -87,16 +87,27 @@ export default function App() {
   //   return getChartPlaylists();
   // },[])
   // console.log(user);
-  async function handleGetAllPlaylist() {
-    const playlists = await playlistApi.getAll(user);
-    setAllPlaylists(playlists);
-    console.log(playlists);
-  }
-  async function handleGetOnePlaylist(playlistId) {
-    const playlists = await playlistApi.getOne(playlistId);
-    // setAllPlaylists(playlists);
-    console.log(playlists);
-  }
+
+
+  // async function handleGetAllPlaylist() {
+  //   const playlists = await playlistApi.getAll(user);
+  //   setAllPlaylists(playlists);
+  //   console.log(playlists);
+  // }
+
+
+
+  // async function handleGetOnePlaylist(playlistId) {
+  //   const playlists = await playlistApi.getOne(playlistId);
+  //   // setAllPlaylists(playlists);
+  //   console.log(playlists);
+  // }
+
+
+
+
+
+
   async function handleDeletePlaylist(playlistId) {
     await playlistApi.deletePlaylist(playlistId);
     const playlists = await playlistApi.getAll(getUser());
@@ -136,11 +147,11 @@ async function handleRemoveFromPlaylist(playlistId, songPosition) {
     }
   }  
 
-async function handleGetSearchSuggestions(term) {
-      const suggestions = await browseApi.getSuggestion(term);
+// async function handleGetSearchSuggestions(term) {
+//       const suggestions = await browseApi.getSuggestion(term);
       
-    console.log(suggestions)
-  }  
+//     console.log(suggestions)
+//   }  
 
   const load = (url) => {
     setNowPlaying({
