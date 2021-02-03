@@ -132,14 +132,12 @@ async function handleAddToPlaylist(playlistId, newSong) {
     }
   }  
 async function handleRemoveFromPlaylist(playlistId, songPosition) {
-  // console.log("here");
     for (var i = 0; i < allPlaylists.length; i++) {
       if (allPlaylists[i]._id === playlistId) {
-        console.log("heree");
         
         let newPlaylist = allPlaylists[i];
         newPlaylist.songs.splice(songPosition,1);
-        const playlists = await playlistApi.deleteOne(newPlaylist);
+        const playlists = await playlistApi.addOneToPlaylist(newPlaylist);
         
         if(thisPlaylist && thisPlaylist._id === playlistId) setThisPlaylist(playlists);
         allPlaylists[i] = playlists;

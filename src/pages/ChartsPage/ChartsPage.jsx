@@ -113,7 +113,7 @@ export default function PlaylistPage({ load, handleAddToPlaylist, allPlaylist })
                               {allPlaylist.map(playlist =>
                                 <MenuItem key={playlist._id} onClick={() => handleAddToPlaylist(playlist._id, {
                                   song_id: song.song_id,
-                                  song_name: song.name,
+                                  song_name: song.song_name,
                                   created_at:Date.now(),
                                   thumbnail:song.thumbnail,
                                   duration: song.duration,
