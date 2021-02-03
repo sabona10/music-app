@@ -98,7 +98,7 @@
     }
 
     .blacklist {
-        z-index: 99;
+        z-index: 15;
         position: relative;
         color: white;
     }

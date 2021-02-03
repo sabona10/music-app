@@ -99,7 +99,7 @@ export default function PlaylistPage({load, thisPlaylist, setThisPlaylist, handl
     }
     // console.log(playlist)
     return (
-      <section className="playllist">
+      <section className="playllist" >
 
         <div>
           <div className="main">
